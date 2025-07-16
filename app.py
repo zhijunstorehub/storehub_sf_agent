@@ -243,9 +243,10 @@ def main():
             "Show me flows for content review processes"
         ]
         
-        for query in sample_queries:
-            if st.sidebar.button(f"📝 {query}", key=f"sample_{query}"):
-                st.session_state['selected_query'] = query
+        for i, query in enumerate(sample_queries):
+            if st.sidebar.button(f"📝 {query}", key=f"sample_{i}"):
+                st.session_state['current_query'] = query
+                st.rerun()
     else:
         st.sidebar.error("❌ System Error")
         st.sidebar.text(system_status.get('error', 'Unknown error'))
@@ -257,16 +258,15 @@ def main():
     # Query input
     query_placeholder = "Ask me anything about your Salesforce Flows..."
     
-    # Check if query was selected from sidebar
-    default_query = st.session_state.get('selected_query', '')
-    if default_query:
-        st.session_state['selected_query'] = ''  # Clear it
+    # Get current query from session state (from sidebar button clicks)
+    current_query = st.session_state.get('current_query', '')
     
     query = st.text_area(
         "Your Question:",
-        value=default_query,
+        value=current_query,
         placeholder=query_placeholder,
-        height=100
+        height=100,
+        key="query_input"
     )
     
     col1, col2, col3 = st.columns([2, 1, 2])
@@ -275,6 +275,10 @@ def main():
     
     # Process query
     if ask_button and query.strip():
+        # Clear the session state to prevent reusing the same query
+        if 'current_query' in st.session_state:
+            st.session_state['current_query'] = ''
+            
         with st.spinner("🔍 Searching Flow knowledge base..."):
             start_time = time.time()
             result = query_rag_system(query, rag_components)
