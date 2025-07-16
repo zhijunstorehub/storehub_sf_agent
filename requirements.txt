@@ -1,17 +1,34 @@
+# Core dependencies
 pydantic>=2.0.0
 python-dotenv>=1.0.0
 streamlit>=1.28.0
 requests>=2.31.0
 rich>=13.0.0
 click>=8.1.0
+
+# LLM and AI dependencies
 langchain>=0.1.0
 langchain-text-splitters>=0.0.1
 google-generativeai>=0.3.0
+
+# Vector database and storage
 chromadb>=0.4.0
 numpy>=1.24.0
+
+# Utilities
 tenacity>=8.2.0
 xmltodict>=0.13.0
 simple-salesforce>=1.12.0
+
+# Data analysis and visualization
 pandas>=2.0.0
 matplotlib>=3.7.0
-seaborn>=0.12.0 
+seaborn>=0.12.0
+
+# System requirements (install manually):
+# Salesforce CLI (sf) - latest version (currently 2.96.4+)
+# Installation: npm install --global @salesforce/cli
+# Required for comprehensive metadata extraction including:
+# - Flows, Apex Classes, Triggers, Validation Rules
+# - Process Builders, Workflow Rules, Custom Objects
+# - Complete source code and XML metadata retrieval 

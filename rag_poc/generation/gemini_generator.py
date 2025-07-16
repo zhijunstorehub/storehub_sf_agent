@@ -96,7 +96,16 @@ class GeminiGenerator:
             
         except Exception as e:
             logger.error(f"Failed to generate answer: {e}")
-            return self._generate_error_response(str(e))
+            error_response = self._generate_error_response(str(e))
+            # Final safety net - ensure we never return None
+            if error_response is None:
+                return {
+                    "answer": "Critical error: Unable to generate any response.",
+                    "error": "Both primary and error response generation failed",
+                    "has_context": False,
+                    "context_length": 0
+                }
+            return error_response
     
     def _create_flow_prompt(self, query: str, context: str) -> str:
         """Create optimized prompt for Salesforce Flow queries."""
@@ -145,7 +154,16 @@ Keep the response professional and helpful, acknowledging the limitation while s
             
         except Exception as e:
             logger.error(f"Failed to generate no-context response: {e}")
-            return self._generate_error_response("Could not generate response")
+            error_response = self._generate_error_response("Could not generate response")
+            # Final safety net - ensure we never return None
+            if error_response is None:
+                return {
+                    "answer": "I'm unable to process your question at this time. Please try again later.",
+                    "error": "Both no-context and error response generation failed",
+                    "has_context": False,
+                    "context_length": 0
+                }
+            return error_response
     
     def _generate_error_response(self, error_message: str) -> Dict[str, Any]:
         """Generate error response."""

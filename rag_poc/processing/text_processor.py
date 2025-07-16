@@ -7,6 +7,7 @@ import logging
 import re
 from typing import List, Dict, Any, Optional
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+import json
 
 logger = logging.getLogger(__name__)
 
@@ -258,16 +259,20 @@ class TextProcessor:
     
     def process_flow(self, flow_metadata: Dict[str, Any]) -> List[FlowDocument]:
         """
-        Process a single Flow into document chunks.
+        Process a single Flow into document chunks optimized for AI Colleague analysis.
         
         Args:
-            flow_metadata: Flow metadata dictionary
+            flow_metadata: Enhanced Flow metadata dictionary with complete XML analysis
             
         Returns:
             List of FlowDocument objects
         """
-        # Create enhanced content
-        enhanced_content = self.create_enhanced_content(flow_metadata)
+        # Use AI Colleague optimized content if available
+        if 'content' in flow_metadata and flow_metadata['content']:
+            enhanced_content = flow_metadata['content']
+        else:
+            # Fallback to creating enhanced content
+            enhanced_content = self.create_enhanced_content(flow_metadata)
         
         if not enhanced_content:
             logger.warning(f"No content generated for Flow {flow_metadata.get('developer_name', 'unknown')}")
@@ -277,18 +282,84 @@ class TextProcessor:
         chunks = self.text_splitter.split_text(enhanced_content)
         
         flow_id = flow_metadata.get('id', '')
-        flow_name = flow_metadata.get('master_label', '')
+        flow_name = flow_metadata.get('label', '')
+        
+        # Extract comprehensive metadata from flow data
+        structural_analysis = flow_metadata.get('structural_analysis', {})
         
         documents = []
         for i, chunk in enumerate(chunks):
             doc_metadata = {
+                # Basic flow identification
                 'chunk_index': i,
                 'total_chunks': len(chunks),
                 'flow_id': flow_id,
                 'flow_name': flow_name,
+                'flow_api_name': flow_metadata.get('api_name', ''),
+                'developer_name': flow_metadata.get('developer_name', ''),
+                
+                # Flow classification
+                'flow_type': flow_metadata.get('trigger_type', 'Unknown'),
                 'trigger_type': flow_metadata.get('trigger_type', ''),
                 'process_type': flow_metadata.get('process_type', ''),
                 'status': flow_metadata.get('status', ''),
+                'is_active': flow_metadata.get('is_active', True),
+                
+                # Version and temporal data
+                'version_number': flow_metadata.get('version_number', ''),
+                'created_by': flow_metadata.get('created_by_name', ''),
+                'created_date': flow_metadata.get('created_date', ''),
+                'last_modified': flow_metadata.get('last_modified_date', ''),
+                'last_modified_date': flow_metadata.get('last_modified_date', ''),
+                'namespace': flow_metadata.get('namespace', ''),
+                'flow_url': flow_metadata.get('flow_url', ''),
+                
+                # Quality and analysis scores
+                'confidence_score': flow_metadata.get('confidence_score', 0.0),
+                'complexity_score': structural_analysis.get('complexity_score', 0.0),
+                'has_xml_metadata': bool(flow_metadata.get('xml_metadata')),
+                'xml_available': bool(flow_metadata.get('xml_metadata')),
+                
+                # Structural analysis
+                'total_elements': structural_analysis.get('total_elements', 0),
+                'has_decisions': structural_analysis.get('has_decisions', False),
+                'has_loops': structural_analysis.get('has_loops', False),
+                'has_subflows': structural_analysis.get('has_subflows', False),
+                'has_screens': structural_analysis.get('has_screens', False),
+                
+                # Element counts
+                'variables_count': len(flow_metadata.get('flow_variables', [])),
+                'decisions_count': len(flow_metadata.get('flow_decisions', [])),
+                'assignments_count': len(flow_metadata.get('flow_assignments', [])),
+                'formulas_count': len(flow_metadata.get('flow_formulas', [])),
+                'constants_count': len(flow_metadata.get('flow_constants', [])),
+                'record_lookups_count': len(flow_metadata.get('flow_record_lookups', [])),
+                'record_creates_count': len(flow_metadata.get('flow_record_creates', [])),
+                'record_updates_count': len(flow_metadata.get('flow_record_updates', [])),
+                'record_deletes_count': len(flow_metadata.get('flow_record_deletes', [])),
+                'screens_count': len(flow_metadata.get('flow_screens', [])),
+                'waits_count': len(flow_metadata.get('flow_waits', [])),
+                'loops_count': len(flow_metadata.get('flow_loops', [])),
+                'subflows_count': len(flow_metadata.get('flow_subflows', [])),
+                
+                # Calculate total record operations
+                'record_operations_count': (
+                    len(flow_metadata.get('flow_record_lookups', [])) +
+                    len(flow_metadata.get('flow_record_creates', [])) +
+                    len(flow_metadata.get('flow_record_updates', [])) +
+                    len(flow_metadata.get('flow_record_deletes', []))
+                ),
+                
+                # Business context
+                'content_type': 'ai_colleague_flow',
+                'business_area': self._extract_business_area(flow_metadata),
+                'object_focus': self._extract_object_focus(flow_metadata),
+                
+                # AI Colleague analysis contexts
+                'business_context': flow_metadata.get('business_analysis', {}).get('context', ''),
+                'technical_context': flow_metadata.get('technical_analysis', {}).get('context', ''),
+                'structural_context': json.dumps(structural_analysis),
+                'dependency_context': flow_metadata.get('context_analysis', {}).get('dependencies', ''),
             }
             
             document = FlowDocument(
@@ -299,8 +370,75 @@ class TextProcessor:
             )
             documents.append(document)
         
-        logger.info(f"Processed Flow '{flow_name}' into {len(documents)} chunks")
+        logger.info(f"Processed Flow '{flow_name}' into {len(documents)} AI Colleague chunks")
         return documents
+    
+    def _extract_business_area(self, flow_metadata: Dict[str, Any]) -> str:
+        """Extract business area from Flow metadata for AI Colleague categorization."""
+        label = flow_metadata.get('label', '').lower()
+        api_name = flow_metadata.get('api_name', '').lower()
+        description = flow_metadata.get('description', '').lower()
+        
+        # Business area detection logic
+        if any(term in label + api_name + description for term in ['lead', 'prospect']):
+            return 'Lead Management'
+        elif any(term in label + api_name + description for term in ['opportunity', 'deal', 'sales']):
+            return 'Opportunity Management'
+        elif any(term in label + api_name + description for term in ['account', 'customer']):
+            return 'Account Management'
+        elif any(term in label + api_name + description for term in ['contact', 'person']):
+            return 'Contact Management'
+        elif any(term in label + api_name + description for term in ['order', 'purchase', 'billing']):
+            return 'Order Management'
+        elif any(term in label + api_name + description for term in ['support', 'case', 'ticket']):
+            return 'Customer Support'
+        elif any(term in label + api_name + description for term in ['onboard', 'training', 'setup']):
+            return 'Onboarding'
+        elif any(term in label + api_name + description for term in ['task', 'activity', 'remind']):
+            return 'Task Management'
+        else:
+            return 'General Automation'
+    
+    def _extract_object_focus(self, flow_metadata: Dict[str, Any]) -> str:
+        """Extract primary object focus from Flow metadata."""
+        label = flow_metadata.get('label', '').lower()
+        api_name = flow_metadata.get('api_name', '').lower()
+        
+        # Object detection from record operations
+        record_operations = []
+        if 'flow_record_lookups' in flow_metadata:
+            record_operations.extend([op.get('object', '') for op in flow_metadata['flow_record_lookups']])
+        if 'flow_record_creates' in flow_metadata:
+            record_operations.extend([op.get('object', '') for op in flow_metadata['flow_record_creates']])
+        if 'flow_record_updates' in flow_metadata:
+            record_operations.extend([op.get('object', '') for op in flow_metadata['flow_record_updates']])
+        if 'flow_record_deletes' in flow_metadata:
+            record_operations.extend([op.get('object', '') for op in flow_metadata['flow_record_deletes']])
+        
+        # Return most common object from operations
+        if record_operations:
+            from collections import Counter
+            most_common = Counter(record_operations).most_common(1)
+            if most_common:
+                return most_common[0][0]
+        
+        # Fallback to name-based detection
+        if 'lead' in label + api_name:
+            return 'Lead'
+        elif 'opportunity' in label + api_name:
+            return 'Opportunity'  
+        elif 'account' in label + api_name:
+            return 'Account'
+        elif 'contact' in label + api_name:
+            return 'Contact'
+        elif 'order' in label + api_name:
+            return 'Order'
+        elif 'case' in label + api_name:
+            return 'Case'
+        elif 'task' in label + api_name:
+            return 'Task'
+        else:
+            return 'Unknown'
     
     def process_flows(self, flows_metadata: List[Dict[str, Any]]) -> List[FlowDocument]:
         """

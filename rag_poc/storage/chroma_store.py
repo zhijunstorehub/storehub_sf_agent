@@ -127,12 +127,60 @@ class ChromaStore:
                 # Prepare metadata (ChromaDB requires string values, no None allowed)
                 metadata = {
                     "flow_name": str(doc.flow_name or ""),
+                    "flow_api_name": str(doc.metadata.get("flow_api_name", "")),
                     "chunk_index": str(doc.metadata.get("chunk_index", 0)),
                     "total_chunks": str(doc.metadata.get("total_chunks", 1)),
                     "original_flow_id": str(doc.metadata.get("flow_id", "")),
                     "trigger_type": str(doc.metadata.get("trigger_type", "")),
                     "process_type": str(doc.metadata.get("process_type", "")),
                     "status": str(doc.metadata.get("status", "")),
+                    "is_active": str(doc.metadata.get("is_active", True)),
+                    "confidence_score": str(doc.metadata.get("confidence_score", 0.0)),
+                    "complexity_score": str(doc.metadata.get("complexity_score", 0.0)),
+                    "has_xml_metadata": str(doc.metadata.get("has_xml_metadata", False)),
+                    "content_type": str(doc.metadata.get("content_type", "flow")),
+                    "business_area": str(doc.metadata.get("business_area", "Unknown")),
+                    "object_focus": str(doc.metadata.get("object_focus", "Unknown")),
+                    
+                    # Enhanced CLI extraction metadata
+                    "flow_type": str(doc.metadata.get("flow_type", "Unknown")),
+                    "version_number": str(doc.metadata.get("version_number", "")),
+                    "created_by": str(doc.metadata.get("created_by", "")),
+                    "created_date": str(doc.metadata.get("created_date", "")),
+                    "last_modified": str(doc.metadata.get("last_modified", "")),
+                    "last_modified_date": str(doc.metadata.get("last_modified_date", "")),
+                    "namespace": str(doc.metadata.get("namespace", "")),
+                    "flow_url": str(doc.metadata.get("flow_url", "")),
+                    
+                    # Structural analysis fields
+                    "total_elements": str(doc.metadata.get("total_elements", 0)),
+                    "has_decisions": str(doc.metadata.get("has_decisions", False)),
+                    "has_loops": str(doc.metadata.get("has_loops", False)),
+                    "has_subflows": str(doc.metadata.get("has_subflows", False)),
+                    "has_screens": str(doc.metadata.get("has_screens", False)),
+                    "record_operations_count": str(doc.metadata.get("record_operations_count", 0)),
+                    "xml_available": str(doc.metadata.get("xml_available", False)),
+                    
+                    # Element counts
+                    "variables_count": str(doc.metadata.get("variables_count", 0)),
+                    "decisions_count": str(doc.metadata.get("decisions_count", 0)),
+                    "assignments_count": str(doc.metadata.get("assignments_count", 0)),
+                    "formulas_count": str(doc.metadata.get("formulas_count", 0)),
+                    "constants_count": str(doc.metadata.get("constants_count", 0)),
+                    "record_lookups_count": str(doc.metadata.get("record_lookups_count", 0)),
+                    "record_creates_count": str(doc.metadata.get("record_creates_count", 0)),
+                    "record_updates_count": str(doc.metadata.get("record_updates_count", 0)),
+                    "record_deletes_count": str(doc.metadata.get("record_deletes_count", 0)),
+                    "screens_count": str(doc.metadata.get("screens_count", 0)),
+                    "waits_count": str(doc.metadata.get("waits_count", 0)),
+                    "loops_count": str(doc.metadata.get("loops_count", 0)),
+                    "subflows_count": str(doc.metadata.get("subflows_count", 0)),
+                    
+                    # AI Colleague analysis fields
+                    "business_context": str(doc.metadata.get("business_context", "")),
+                    "technical_context": str(doc.metadata.get("technical_context", "")),
+                    "structural_context": str(doc.metadata.get("structural_context", "")),
+                    "dependency_context": str(doc.metadata.get("dependency_context", "")),
                 }
                 metadatas.append(metadata)
             

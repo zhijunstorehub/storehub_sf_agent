@@ -163,8 +163,8 @@ class RAGPipeline:
             console.print(f"📊 Found {len(flows)} flows: {active_count} active, {inactive_count} inactive", style="blue")
             
             # Fetch complete metadata for flows
-            console.print("📋 Fetching complete flow metadata with XML using Tooling API...", style="blue")
-            complete_flows = self.flow_fetcher.fetch_all_flow_metadata(flows)
+            console.print("📋 Extracting complete Flow XML metadata using Salesforce CLI...", style="blue")
+            complete_flows = self.flow_fetcher.extract_complete_xml_metadata(flows)
             
             # Process Flows
             console.print(f"📝 Processing {len(complete_flows)} Flows...", style="blue")

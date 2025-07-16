@@ -1,204 +1,279 @@
-# 🚀 Salesforce Flow RAG POC
+# Salesforce RAG System - AI Colleague Enhanced
 
-**Week 1 of AI-First Vision 3.0: The Great Awakening**
+A comprehensive CLI-first Salesforce metadata extraction and RAG (Retrieval-Augmented Generation) system designed for AI-driven automation analysis and the **AI-First Vision 3.0** initiative.
 
-Transform trapped operational knowledge into institutional intelligence through AI-powered Retrieval Augmented Generation (RAG).
+## 🚀 Key Features
 
-## 🎯 Project Overview
+### Comprehensive Metadata Extraction
+- **Complete Automation Coverage**: Flows, Apex Classes, Triggers, Validation Rules, Workflow Rules, Process Builders
+- **CLI-First Architecture**: Full XML metadata and source code extraction using latest Salesforce CLI
+- **Multi-Layer Analysis**: Technical, business, and structural analysis for each component
+- **Business Intelligence**: Object relationships, dependency mapping, and business area classification
+- **AI Colleague Ready**: Optimized for LLM-based analysis and the Universal Assessor Agent
 
-This POC demonstrates how to unlock the value of Salesforce Flow documentation using modern AI technology. Instead of manually searching through complex Flow configurations, users can ask natural language questions and receive instant, accurate answers with source attribution.
+### Advanced RAG Capabilities
+- **Multi-Vector Storage**: Enhanced ChromaDB with comprehensive metadata fields
+- **Semantic Search**: Powered by Google Gemini embeddings for precise retrieval
+- **Confidence Scoring**: Quality assessment for reliable AI responses
+- **Cross-Component Queries**: Sophisticated queries across all Salesforce automation
 
-### 🌟 Key Features
+## 🏗️ System Architecture
 
-- **🔍 Intelligent Query System**: Ask questions in natural language about Salesforce Flows
-- **🎨 Beautiful Web Interface**: Professional Streamlit-based UI for demos
-- **⚡ Real-time Search**: Vector similarity search with Gemini embeddings
-- **📊 Source Attribution**: Answers include references to specific Flows
-- **🔒 Secure Integration**: Proper credential management for Salesforce and Google AI
-
-## 🏗️ Architecture
-
+```mermaid
+graph TD
+    A[Salesforce Org] --> B[CLI Discovery & Extraction]
+    B --> C[Multi-Layer Analysis]
+    C --> D[Business Intelligence Enhancement]
+    D --> E[Vector Database Storage]
+    E --> F[AI Colleague Queries]
+    F --> G[LLM-Generated Insights]
 ```
-Salesforce Org → Flow Discovery → Text Processing → Vector Embeddings → ChromaDB
-                                                                            ↓
-User Query → Streamlit UI → Similarity Search → Context Retrieval → Gemini Generation → Answer
-```
 
-### 🛠️ Technology Stack
+## 📋 Requirements
 
-- **Salesforce API**: Flow metadata discovery and retrieval
-- **Google Gemini**: Latest AI models for embeddings and generation
-- **ChromaDB**: Vector database for similarity search
-- **Streamlit**: Web interface for demonstrations
-- **Python**: Core application logic with modern async patterns
-
-## 🚀 Quick Start
-
-### Prerequisites
-
-- Python 3.10+
-- Salesforce org access (sandbox recommended)
-- Google AI API key
-- Git
-
-### Installation
-
-1. **Clone the repository**
+### System Requirements
+1. **Salesforce CLI** (Latest Version)
    ```bash
-   git clone https://github.com/zhijunstorehub/rag-poc.git
-   cd rag-poc
+   npm install --global @salesforce/cli
+   sf --version  # Should be 2.96.4+
    ```
 
-2. **Install dependencies**
+2. **Authenticated Salesforce Org**
+   ```bash
+   sf org login web --alias sandbox --instance-url https://test.salesforce.com
+   ```
+
+3. **Python 3.8+** with dependencies
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **Configure credentials**
-   ```bash
-   cp .env.template .env
-   # Edit .env with your credentials
-   ```
-
-4. **Ingest Flow data**
-   ```bash
-   python -m rag_poc.cli.main_cli ingest --max-flows 10
-   ```
-
-5. **Launch web interface**
-   ```bash
-   streamlit run app.py
-   ```
-
-## 💡 Usage Examples
-
-### Command Line Interface
-
+### Environment Variables
 ```bash
-# Ingest Salesforce Flows
-python -m rag_poc.cli.main_cli ingest --max-flows 15
-
-# Query the system
-python -m rag_poc.cli.main_cli query "What flows handle content approval?"
+GEMINI_API_KEY=your_gemini_api_key
+SALESFORCE_USERNAME=your_username
+SALESFORCE_PASSWORD=your_password
+SALESFORCE_SECURITY_TOKEN=your_token
+SALESFORCE_DOMAIN=test  # or login for production
 ```
 
-### Web Interface
+## 🚀 Quick Start
 
-Launch the Streamlit app and try these sample queries:
-- "What flows handle content management?"
-- "How do approval processes work?"
-- "Which flows are used for notifications?"
-- "Show me CMS workflow automation"
+### 1. Basic Comprehensive Extraction
 
-## 📁 Project Structure
+Extract all automation metadata types:
+
+```bash
+python rag_poc/cli/comprehensive_ingest.py
+```
+
+### 2. Targeted Extraction
+
+Extract specific metadata types with options:
+
+```bash
+python rag_poc/cli/comprehensive_ingest.py \
+  -t flow -t apexclass -t apextrigger \
+  --max-per-type 1000 \
+  --include-inactive \
+  --verbose
+```
+
+### 3. Testing and Validation
+
+```bash
+# Quick system test
+python test_comprehensive_extraction.py
+
+# Dry run for validation
+python rag_poc/cli/comprehensive_ingest.py --dry-run --verbose
+```
+
+### 4. Query the System
+
+```bash
+# Start the Streamlit interface
+streamlit run app.py
+
+# Or use the CLI for direct queries
+python -m rag_poc.cli.main_cli "Show me all inactive opportunity flows"
+```
+
+## 📊 Supported Metadata Types
+
+### Core Automation
+- **Flows**: Complete XML with elements, variables, decisions, assignments
+- **Apex Classes**: Full source code, dependencies, complexity analysis
+- **Apex Triggers**: Source code, trigger events, object associations
+- **Validation Rules**: Formula expressions, error messages, business context
+- **Workflow Rules**: Legacy automation with trigger conditions and actions
+- **Process Builders**: Modern automation (stored as Flows in newer orgs)
+
+### Configuration Components
+- **Custom Objects**: Schema definitions and business relationships
+- **Custom Fields**: Field definitions, formulas, dependencies
+- **Record Types**: Business process variations
+- **Permission Sets**: Security configurations
+- **Profiles**: User access patterns
+
+## 🎯 AI-First Vision 3.0 Integration
+
+### Universal Assessor Agent Support
+
+The system provides the foundation for:
+
+- **Complete Automation Discovery**: 300+ undocumented workflows
+- **Business Process Intelligence**: Cross-component analysis
+- **Migration Planning**: Flow-to-Apex conversion with dependency mapping
+- **$50M Opportunity Discovery**: Through comprehensive automation intelligence
+
+### Phase-Based Evolution
+
+- ✅ **Phase 1**: Multi-Layer Semantic Extraction (Implemented)
+- 🔄 **Phase 2**: Dependency Analysis & Knowledge Graph (Enhanced metadata ready)
+- 📋 **Phase 3**: Context-Aware Debugging (Complete source code available)
+- 📋 **Phase 4**: Pattern-Based Builder (Comprehensive patterns for templates)
+
+## 🔧 CLI Commands
+
+### Comprehensive Ingestion
+
+```bash
+# Basic extraction
+python rag_poc/cli/comprehensive_ingest.py
+
+# Advanced options
+python rag_poc/cli/comprehensive_ingest.py \
+  --org production \
+  --max-per-type 500 \
+  --confidence-threshold 7.0 \
+  --output-stats stats.json
+
+# Specific metadata types
+python rag_poc/cli/comprehensive_ingest.py \
+  -t flow -t apexclass -t validationrule
+```
+
+### Legacy Flow-Only Ingestion
+
+```bash
+# Flow-specific extraction (legacy)
+python ai_colleague_ingest.py --confidence-threshold 7.0
+```
+
+### Interactive Queries
+
+```bash
+# Web interface
+streamlit run app.py
+
+# CLI interface
+python -m rag_poc.cli.main_cli "What Apex triggers exist for Lead object?"
+```
+
+## 📈 Performance & Scale
+
+### Extraction Performance
+- **Batch Processing**: 50 components per CLI call for optimal speed
+- **Parallel Processing**: Multiple metadata types processed concurrently
+- **Memory Efficient**: Streaming processing for large codebases
+- **Error Recovery**: Graceful handling of individual component failures
+
+### Scale Characteristics
+- **Large Orgs**: Tested with 500+ components per type
+- **Timeout Handling**: Robust timeout and retry mechanisms
+- **Progress Tracking**: Real-time progress with Rich UI
+- **Quality Filtering**: Confidence-based filtering for high-quality data
+
+## 🛠️ Development
+
+### Project Structure
 
 ```
 rag-poc/
-├── app.py                      # Streamlit web interface
-├── requirements.txt            # Python dependencies
-├── rag_poc/                   # Core package
-│   ├── cli/                   # Command line interface
-│   ├── config.py              # Configuration management
-│   ├── embeddings/            # Gemini embeddings integration
-│   ├── generation/            # AI text generation
-│   ├── processing/            # Text processing and chunking
-│   ├── retrieval/             # Vector search logic
-│   ├── salesforce/            # Salesforce API integration
-│   └── storage/               # ChromaDB vector store
-├── tests/                     # Test suite
-└── docs/                      # Documentation
+├── rag_poc/
+│   ├── cli/                    # CLI interfaces
+│   │   ├── comprehensive_ingest.py  # Main comprehensive extraction
+│   │   └── main_cli.py        # Query interface
+│   ├── salesforce/            # Salesforce integration
+│   │   ├── comprehensive_cli_extractor.py  # CLI-based extractor
+│   │   ├── flow_fetcher.py    # Flow-specific extraction
+│   │   └── client.py          # Salesforce client
+│   ├── processing/            # Data processing
+│   ├── storage/               # Vector database
+│   ├── embeddings/            # AI embeddings
+│   └── generation/            # Response generation
+├── docs/                      # Documentation
+├── tests/                     # Test suites
+└── data/                      # Vector database storage
 ```
 
-## 🔧 Configuration
-
-### Environment Variables
-
-Create a `.env` file with:
-
-```env
-# Salesforce Configuration
-SALESFORCE_USERNAME=your_username@company.com.sandbox
-SALESFORCE_PASSWORD=your_password
-SALESFORCE_SECURITY_TOKEN=your_security_token
-SALESFORCE_DOMAIN=your-sandbox.sandbox.my
-
-# Google AI Configuration
-GOOGLE_API_KEY=your_gemini_api_key
-```
-
-### Advanced Configuration
-
-Modify `rag_poc/config.py` for:
-- Chunk sizes and overlap settings
-- Vector store parameters
-- Model selection
-- Rate limiting
-
-## 🎭 Demo Guide
-
-### For Friday Presentations
-
-1. **Launch the app**: `streamlit run app.py`
-2. **Check system status** in the sidebar
-3. **Try sample queries** using the provided buttons
-4. **Show retrieval metrics** including response time and sources
-5. **Demonstrate source attribution** by expanding the context view
-
-### Key Demo Points
-
-- **Speed**: Sub-2-second response times
-- **Accuracy**: Answers based on actual Flow documentation
-- **Transparency**: Clear source attribution
-- **Usability**: Natural language queries vs. manual search
-
-## 🔍 Troubleshooting
-
-### Common Issues
-
-1. **Salesforce Connection**: Ensure correct sandbox domain format
-2. **Empty Results**: Check if Flows have descriptions in your org
-3. **API Limits**: Gemini API has rate limits - adjust batch sizes
-4. **ChromaDB Errors**: Ensure data directory has write permissions
-
-### Debug Tools
+### Testing
 
 ```bash
-# Test Salesforce connection
-python test_setup.py
+# System tests
+python test_comprehensive_extraction.py
 
-# Check Flow discovery
-python test_flow_objects.py
+# Individual component tests
+python -m pytest tests/
 
-# Full system test
+# Integration tests
 python test_full_rag.py
 ```
 
-## 📈 Future Enhancements
+### Contributing
 
-- **Multi-org Support**: Connect to multiple Salesforce orgs
-- **Enhanced Metadata**: Include Flow version history and dependencies
-- **Advanced Filtering**: Filter by Flow type, owner, or modification date
-- **Batch Processing**: Handle large-scale Flow ingestion
-- **Analytics Dashboard**: Usage metrics and query insights
+1. **Add New Metadata Types**: Extend `MetadataType` enum and implement extraction logic
+2. **Enhance Analysis**: Add new business intelligence rules
+3. **Improve CLI**: Add new command options and features
+4. **Extend Documentation**: Update comprehensive extraction docs
 
-## 🤝 Contributing
+## 📚 Documentation
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests for new functionality
-5. Submit a pull request
+- **[Comprehensive Extraction Guide](COMPREHENSIVE_EXTRACTION.md)**: Complete CLI extraction documentation
+- **[Query Analytics](QUERY_ANALYTICS.md)**: Query performance and statistics
+- **[AI Vision Documents](BI%20-%20AI%20First%20Vision%203.0.md)**: Strategic context and roadmap
 
-## 📄 License
+## 🔍 Example Queries
 
-This project is part of the AI-First Vision 3.0 initiative.
+### Business Intelligence
+- "Show me all automation for lead management process"
+- "What inactive flows exist for opportunity management?"
+- "Which Apex triggers have high complexity scores?"
 
-## 🙋‍♂️ Support
+### Technical Analysis
+- "Find all validation rules for the Account object"
+- "Show me flows that create or update Contact records"
+- "What workflow rules are still active in the org?"
 
-For questions or issues:
-- Create an issue in this repository
-- Contact the AI Operations Excellence Team
+### Dependency Analysis
+- "Which components depend on the Opportunity object?"
+- "Show me all automation that references custom fields"
+- "What flows call other subflows?"
+
+## 🚨 Important Notes
+
+### CLI-First Benefits
+- **Complete Metadata**: Unlike API approaches, CLI provides full XML and source code
+- **Accurate Status**: Precise active/inactive status from XML `<status>` tags
+- **No API Limits**: Bypass API governor limits for large-scale extraction
+- **Future-Proof**: Compatible with latest Salesforce CLI features
+
+### Quality Assurance
+- **Confidence Scoring**: Each component rated 0-10 for data quality
+- **Business Context**: Automatic categorization by business area
+- **Dependency Mapping**: Cross-component relationship analysis
+- **Error Handling**: Graceful handling of malformed metadata
+
+## 📞 Support
+
+For issues, questions, or contributions:
+
+1. **System Tests**: Run `python test_comprehensive_extraction.py`
+2. **Debug Mode**: Use `--verbose` flag for detailed logging
+3. **Documentation**: Check `COMPREHENSIVE_EXTRACTION.md` for complete guide
+4. **CLI Help**: Run `python rag_poc/cli/comprehensive_ingest.py --help`
 
 ---
 
-**Built with ❤️ for Week 1 of The Great Awakening** 
+**AI-First Vision 3.0**: Transforming Salesforce automation analysis through comprehensive metadata extraction and AI-driven business intelligence. 
