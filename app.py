@@ -172,30 +172,22 @@ def query_rag_system(query: str, rag_components: Dict) -> Dict[str, Any]:
                 'sources': []
             }
         
-        # Prepare context from search results
+        # Prepare context from search results (correct format)
         context_parts = []
         sources = []
         
         for result in search_results:
-            if 'document' in result:
-                context_parts.append(result['document'])
+            if 'content' in result:
+                context_parts.append(result['content'])
                 if 'metadata' in result:
                     flow_name = result['metadata'].get('flow_name', 'Unknown Flow')
                     sources.append(flow_name)
         
         context = "\n".join(context_parts)
         
-        # Generate answer
-        prompt = f"""Based on the following Salesforce Flow documentation, answer the user's question.
-
-Flow Documentation:
-{context}
-
-User Question: {query}
-
-Please provide a helpful, accurate answer based on the Flow documentation. If the documentation doesn't contain relevant information, say so clearly."""
-
-        answer = generator.generate(prompt)
+        # Generate answer using the correct method
+        answer_result = generator.generate_answer(query, context)
+        answer = answer_result.get('answer', 'Unable to generate answer')
         
         return {
             'success': True,
