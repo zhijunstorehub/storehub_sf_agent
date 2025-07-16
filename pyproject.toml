@@ -1,0 +1,70 @@
+[tool.poetry]
+name = "rag-poc"
+version = "0.1.0"
+description = "Salesforce Flow RAG Ingestion POC - Week 1 of AI-First Vision 3.0"
+authors = ["Zhi Jun <zj@storehub.com>"]
+readme = "README.md"
+packages = [{include = "rag_poc"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+langchain = "^0.1.0"
+langchain-google-genai = "^1.0.0"
+langchain-chroma = "^0.1.0"
+chromadb = "^0.4.22"
+simple-salesforce = "^1.12.6"
+python-dotenv = "^1.0.0"
+click = "^8.1.7"
+rich = "^13.7.0"
+pydantic = "^2.5.0"
+requests = "^2.31.0"
+xmltodict = "^0.13.0"
+tiktoken = "^0.5.2"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.4"
+black = "^23.12.1"
+isort = "^5.13.2"
+flake8 = "^7.0.0"
+mypy = "^1.8.0"
+pre-commit = "^3.6.0"
+
+[tool.poetry.scripts]
+rag-ingest = "rag_poc.cli:ingest_command"
+rag-query = "rag_poc.cli:query_command"
+rag-cli = "rag_poc.cli:interactive_cli"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["rag_poc"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true 
