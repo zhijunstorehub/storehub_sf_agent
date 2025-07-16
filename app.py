@@ -43,48 +43,202 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for better styling
+# Enhanced CSS for better styling and readability
 st.markdown("""
 <style>
+    /* Main container styling */
+    .main .block-container {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    
+    /* Header styling */
     .main-header {
         text-align: center;
-        background: linear-gradient(90deg, #1f77b4, #2e86de);
+        background: linear-gradient(135deg, #1f77b4, #2e86de, #3742fa);
         color: white;
-        padding: 2rem;
-        border-radius: 10px;
+        padding: 2.5rem;
+        border-radius: 15px;
         margin-bottom: 2rem;
+        box-shadow: 0 8px 32px rgba(31, 119, 180, 0.3);
     }
     
-    .metric-card {
-        background: #f8f9fa;
-        padding: 1rem;
-        border-radius: 8px;
-        border-left: 4px solid #1f77b4;
+    .main-header h1 {
+        margin: 0;
+        font-size: 2.5rem;
+        font-weight: 700;
     }
     
-    .query-box {
-        background: #ffffff;
-        padding: 1.5rem;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        margin: 1rem 0;
+    .main-header h3 {
+        margin: 0.5rem 0;
+        font-size: 1.3rem;
+        font-weight: 400;
+        opacity: 0.9;
     }
     
+    .main-header p {
+        margin: 0;
+        font-size: 1rem;
+        opacity: 0.8;
+    }
+    
+    /* Answer box with much better contrast */
     .answer-box {
-        background: #f0f8ff;
-        padding: 1.5rem;
+        background: linear-gradient(145deg, #ffffff, #f8f9fa);
+        border: 2px solid #e3f2fd;
+        border-left: 6px solid #2196f3;
+        padding: 2rem;
+        border-radius: 12px;
+        margin: 1.5rem 0;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+    
+    .answer-box h3 {
+        color: #1565c0 !important;
+        margin-top: 0;
+        margin-bottom: 1rem;
+        font-size: 1.4rem;
+        font-weight: 600;
+    }
+    
+    .answer-box p {
+        color: #2c3e50 !important;
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 0;
+        text-align: left;
+    }
+    
+    /* Sidebar styling */
+    .css-1d391kg {
+        background-color: #1a1a1a;
+    }
+    
+    /* Sample query buttons */
+    .stButton button {
+        width: 100%;
+        text-align: left;
+        background: linear-gradient(145deg, #f1f3f4, #e8eaf6);
+        border: 1px solid #c5cae9;
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        margin-bottom: 0.5rem;
+        transition: all 0.3s ease;
+    }
+    
+    .stButton button:hover {
+        background: linear-gradient(145deg, #e3f2fd, #bbdefb);
+        border-color: #2196f3;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
+    }
+    
+    /* Main Ask button */
+    div[data-testid="column"]:nth-child(2) .stButton button {
+        background: linear-gradient(145deg, #ff5722, #ff7043);
+        color: white;
+        font-weight: 600;
+        font-size: 1.1rem;
+        padding: 0.75rem 2rem;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 16px rgba(255, 87, 34, 0.3);
+    }
+    
+    div[data-testid="column"]:nth-child(2) .stButton button:hover {
+        background: linear-gradient(145deg, #ff7043, #ff8a65);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 87, 34, 0.4);
+    }
+    
+    /* Text area styling */
+    .stTextArea textarea {
+        border: 2px solid #e1e5e9;
+        border-radius: 8px;
+        padding: 1rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        background-color: #ffffff;
+        color: #2c3e50;
+    }
+    
+    .stTextArea textarea:focus {
+        border-color: #2196f3;
+        box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+    }
+    
+    /* Stats and metadata cards */
+    .stats-card {
+        background: linear-gradient(145deg, #ffffff, #f5f5f5);
+        border: 1px solid #e0e0e0;
         border-radius: 10px;
-        border-left: 4px solid #2e86de;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    
+    .stats-card h4 {
+        color: #1565c0;
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+    
+    .stats-card p {
+        color: #424242;
+        margin: 0.25rem 0;
+        font-size: 0.95rem;
+    }
+    
+    /* Source list styling */
+    .source-list {
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        padding: 1rem;
         margin: 1rem 0;
     }
     
-    .context-box {
-        background: #f9f9f9;
-        padding: 1rem;
+    .source-list h4 {
+        color: #495057;
+        margin-bottom: 0.75rem;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+    
+    /* Context expander styling */
+    .streamlit-expanderHeader {
+        background-color: #f1f3f4;
         border-radius: 8px;
-        font-size: 0.9em;
+        border: 1px solid #dadce0;
+    }
+    
+    /* Footer styling */
+    .footer-section {
+        background: linear-gradient(145deg, #fafafa, #f0f0f0);
+        border-top: 2px solid #e0e0e0;
+        padding: 1.5rem 0;
+        margin-top: 2rem;
+        border-radius: 8px;
+    }
+    
+    .footer-section p {
         color: #666;
-        margin-top: 1rem;
+        margin: 0;
+        font-size: 0.9rem;
+        text-align: center;
+    }
+    
+    /* Warning and error messages */
+    .stAlert {
+        border-radius: 8px;
+        border: none;
+        font-weight: 500;
+    }
+    
+    /* Spinner customization */
+    .stSpinner {
+        color: #2196f3;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -246,7 +400,6 @@ def main():
         for i, query in enumerate(sample_queries):
             if st.sidebar.button(f"📝 {query}", key=f"sample_{i}"):
                 st.session_state['current_query'] = query
-                st.rerun()
     else:
         st.sidebar.error("❌ System Error")
         st.sidebar.text(system_status.get('error', 'Unknown error'))
@@ -261,12 +414,22 @@ def main():
     # Get current query from session state (from sidebar button clicks)
     current_query = st.session_state.get('current_query', '')
     
+    # Use session state to avoid reloading issues
+    if 'query_text' not in st.session_state:
+        st.session_state.query_text = current_query
+    
+    # Update query text if a sample was clicked
+    if current_query and current_query != st.session_state.query_text:
+        st.session_state.query_text = current_query
+        st.session_state['current_query'] = ''  # Clear immediately
+    
     query = st.text_area(
         "Your Question:",
-        value=current_query,
+        value=st.session_state.query_text,
         placeholder=query_placeholder,
         height=100,
-        key="query_input"
+        key="query_input",
+        on_change=lambda: setattr(st.session_state, 'query_text', st.session_state.query_input)
     )
     
     col1, col2, col3 = st.columns([2, 1, 2])
@@ -274,39 +437,42 @@ def main():
         ask_button = st.button("🔍 Ask", type="primary", use_container_width=True)
     
     # Process query
-    if ask_button and query.strip():
-        # Clear the session state to prevent reusing the same query
-        if 'current_query' in st.session_state:
-            st.session_state['current_query'] = ''
-            
+    if ask_button and query.strip():            
         with st.spinner("🔍 Searching Flow knowledge base..."):
             start_time = time.time()
             result = query_rag_system(query, rag_components)
             response_time = time.time() - start_time
         
         if result['success']:
-            # Display answer
+            # Display answer with improved styling
             st.markdown(f"""
             <div class="answer-box">
                 <h3>✅ Answer</h3>
-                <p>{result['answer']}</p>
+                <p>{result['answer'].replace('<', '&lt;').replace('>', '&gt;')}</p>
             </div>
             """, unsafe_allow_html=True)
             
-            # Show context and metadata
-            col1, col2 = st.columns([2, 1])
+            # Show context and metadata with better cards
+            col1, col2 = st.columns([3, 2])
             
             with col1:
                 if result.get('sources'):
-                    st.markdown("**📚 Flow Sources:**")
-                    for source in result['sources']:
-                        st.markdown(f"• {source}")
+                    st.markdown(f"""
+                    <div class="source-list">
+                        <h4>📚 Flow Sources</h4>
+                        {"".join([f"<p>• {source}</p>" for source in result['sources']])}
+                    </div>
+                    """, unsafe_allow_html=True)
             
             with col2:
-                st.markdown("**📊 Query Stats:**")
-                st.markdown(f"• Response time: {response_time:.2f}s")
-                st.markdown(f"• Documents found: {result.get('doc_count', 0)}")
-                st.markdown(f"• Context length: {len(result.get('context', ''))} chars")
+                st.markdown(f"""
+                <div class="stats-card">
+                    <h4>📊 Query Stats</h4>
+                    <p>• Response time: {response_time:.2f}s</p>
+                    <p>• Documents found: {result.get('doc_count', 0)}</p>
+                    <p>• Context length: {len(result.get('context', ''))} chars</p>
+                </div>
+                """, unsafe_allow_html=True)
             
             # Show context (collapsible)
             if result.get('context'):
@@ -319,18 +485,22 @@ def main():
     elif ask_button and not query.strip():
         st.warning("Please enter a question about Salesforce Flows.")
     
-    # Footer
-    st.markdown("---")
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        st.markdown("**🎯 Purpose:** Demonstrate AI-powered knowledge retrieval")
-    
-    with col2:
-        st.markdown("**🔧 Tech:** Salesforce + Gemini + ChromaDB + RAG")
-    
-    with col3:
-        st.markdown(f"**📅 Demo Date:** {datetime.now().strftime('%B %d, %Y')}")
+    # Enhanced Footer
+    st.markdown(f"""
+    <div class="footer-section">
+        <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <div style="text-align: center;">
+                <p><strong>🎯 Purpose:</strong><br/>Demonstrate AI-powered knowledge retrieval</p>
+            </div>
+            <div style="text-align: center;">
+                <p><strong>🔧 Tech Stack:</strong><br/>Salesforce + Gemini + ChromaDB + RAG</p>
+            </div>
+            <div style="text-align: center;">
+                <p><strong>📅 Demo Date:</strong><br/>{datetime.now().strftime('%B %d, %Y')}</p>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main() 
