@@ -10,8 +10,12 @@ from simple_salesforce import Salesforce
 from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, TextColumn
 
-from ..config import settings, MetadataType, METADATA_API_MAPPING
-from ..core.models import (
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from config import settings, MetadataType, METADATA_API_MAPPING
+from core.models import (
     BaseSalesforceComponent, FlowAnalysis, ApexClassAnalysis, ApexTriggerAnalysis,
     ValidationRuleAnalysis, WorkflowRuleAnalysis, ProcessBuilderAnalysis,
     CustomObjectAnalysis, CustomFieldAnalysis, ComponentType

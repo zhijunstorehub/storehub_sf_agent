@@ -2,7 +2,8 @@
 
 import os
 from typing import Optional, List, Dict
-from pydantic import BaseSettings, validator
+from pydantic import BaseModel, Field
+from pydantic_settings import BaseSettings
 from enum import Enum
 
 class MetadataType(str, Enum):
@@ -89,19 +90,19 @@ class Settings(BaseSettings):
     metadata_output_directory: str = "output/metadata"
     temp_directory: str = "temp"
     
-    @validator('neo4j_uri')
-    def validate_neo4j_uri(cls, v):
-        if not v.startswith(('neo4j://', 'neo4j+s://', 'bolt://', 'bolt+s://')):
+    def validate_neo4j_uri(self) -> str:
+        if not self.neo4j_uri.startswith(('neo4j://', 'neo4j+s://', 'bolt://', 'bolt+s://')):
             raise ValueError('Neo4j URI must start with neo4j://, neo4j+s://, bolt://, or bolt+s://')
-        return v
+        return self.neo4j_uri
     
-    @validator('supported_metadata_types', pre=True)
-    def validate_metadata_types(cls, v):
-        if isinstance(v, str):
-            return [MetadataType(v)]
-        elif isinstance(v, list):
-            return [MetadataType(item) if isinstance(item, str) else item for item in v]
-        return v
+    def validate_metadata_types(self) -> List[MetadataType]:
+        validated_types = []
+        for item in self.supported_metadata_types:
+            if isinstance(item, str):
+                validated_types.append(MetadataType(item))
+            else:
+                validated_types.append(item)
+        return validated_types
     
     @property
     def neo4j_api_url(self) -> str:
@@ -135,6 +136,7 @@ class Settings(BaseSettings):
     class Config:
         env_file = ".env"
         case_sensitive = False
+        extra = "ignore"  # Ignore extra fields from .env file
 
 # Global settings instance
 settings = Settings()

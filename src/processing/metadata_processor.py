@@ -7,15 +7,19 @@ from typing import List, Dict, Any, Optional, Union
 from rich.console import Console
 from rich.progress import Progress, TaskID
 
-from ..config import settings, MetadataType, ProcessingMode
-from ..core.models import (
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from config import settings, MetadataType, ProcessingMode
+from core.models import (
     ComponentAnalysisResult, FlowAnalysis, ApexClassAnalysis, ApexTriggerAnalysis,
     ValidationRuleAnalysis, WorkflowRuleAnalysis, ProcessBuilderAnalysis,
     CustomObjectAnalysis, CustomFieldAnalysis, SemanticAnalysis, RiskAssessment,
     Dependency, ComponentType, RiskLevel, ComplexityLevel, DependencyType
 )
-from ..services.llm_service import LLMService
-from ..salesforce.client import EnhancedSalesforceClient
+from services.llm_service import LLMService
+from salesforce.client import EnhancedSalesforceClient
 
 console = Console()
 

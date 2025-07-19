@@ -1,7 +1,7 @@
 """Enhanced data models for the AI Colleague system - Phase 2 Expansion."""
 
 from datetime import datetime
-from typing import List, Optional, Dict, Any, Union
+from typing import List, Optional, Dict, Any, Union, Literal
 from pydantic import BaseModel, Field
 from enum import Enum
 
@@ -91,7 +91,7 @@ class Dependency(BaseModel):
 # Component-Specific Models
 class FlowAnalysis(BaseSalesforceComponent):
     """Enhanced flow analysis model."""
-    component_type: ComponentType = Field(default=ComponentType.FLOW, const=True)
+    component_type: Literal[ComponentType.FLOW] = Field(default=ComponentType.FLOW)
     flow_type: Optional[str] = Field(None, description="Type of flow (Screen, Autolaunched, etc.)")
     trigger_type: Optional[str] = Field(None, description="What triggers the flow")
     has_screens: bool = Field(default=False, description="Whether flow has user screens")
@@ -106,7 +106,7 @@ class FlowAnalysis(BaseSalesforceComponent):
 
 class ApexClassAnalysis(BaseSalesforceComponent):
     """Apex class analysis model."""
-    component_type: ComponentType = Field(default=ComponentType.APEX_CLASS, const=True)
+    component_type: Literal[ComponentType.APEX_CLASS] = Field(default=ComponentType.APEX_CLASS)
     is_test_class: bool = Field(default=False, description="Whether this is a test class")
     test_coverage: Optional[float] = Field(None, ge=0.0, le=100.0, description="Test coverage percentage")
     methods_count: int = Field(default=0, ge=0, description="Number of methods")
@@ -124,7 +124,7 @@ class ApexClassAnalysis(BaseSalesforceComponent):
 
 class ApexTriggerAnalysis(BaseSalesforceComponent):
     """Apex trigger analysis model."""
-    component_type: ComponentType = Field(default=ComponentType.APEX_TRIGGER, const=True)
+    component_type: Literal[ComponentType.APEX_TRIGGER] = Field(default=ComponentType.APEX_TRIGGER)
     sobject_type: str = Field(..., description="Object this trigger is on")
     trigger_events: List[str] = Field(..., description="Trigger events (before insert, after update, etc.)")
     is_bulk_safe: bool = Field(default=False, description="Whether trigger handles bulk operations safely")
@@ -137,7 +137,7 @@ class ApexTriggerAnalysis(BaseSalesforceComponent):
     
 class ValidationRuleAnalysis(BaseSalesforceComponent):
     """Validation rule analysis model."""
-    component_type: ComponentType = Field(default=ComponentType.VALIDATION_RULE, const=True)
+    component_type: Literal[ComponentType.VALIDATION_RULE] = Field(default=ComponentType.VALIDATION_RULE)
     sobject_type: str = Field(..., description="Object this validation rule is on")
     formula: str = Field(..., description="Validation rule formula")
     error_message: str = Field(..., description="Error message displayed")
@@ -150,7 +150,7 @@ class ValidationRuleAnalysis(BaseSalesforceComponent):
     
 class WorkflowRuleAnalysis(BaseSalesforceComponent):
     """Workflow rule analysis model."""
-    component_type: ComponentType = Field(default=ComponentType.WORKFLOW_RULE, const=True)
+    component_type: Literal[ComponentType.WORKFLOW_RULE] = Field(default=ComponentType.WORKFLOW_RULE)
     sobject_type: str = Field(..., description="Object this workflow rule is on")
     trigger_type: str = Field(..., description="When rule is triggered")
     criteria_formula: Optional[str] = Field(None, description="Rule criteria formula")
@@ -162,7 +162,7 @@ class WorkflowRuleAnalysis(BaseSalesforceComponent):
 
 class ProcessBuilderAnalysis(BaseSalesforceComponent):
     """Process Builder analysis model."""
-    component_type: ComponentType = Field(default=ComponentType.PROCESS_BUILDER, const=True)
+    component_type: Literal[ComponentType.PROCESS_BUILDER] = Field(default=ComponentType.PROCESS_BUILDER)
     sobject_type: str = Field(..., description="Object this process is on")
     process_type: str = Field(..., description="Type of process")
     trigger_type: str = Field(..., description="When process is triggered")
@@ -176,7 +176,7 @@ class ProcessBuilderAnalysis(BaseSalesforceComponent):
 
 class CustomObjectAnalysis(BaseSalesforceComponent):
     """Custom object analysis model."""
-    component_type: ComponentType = Field(default=ComponentType.CUSTOM_OBJECT, const=True)
+    component_type: Literal[ComponentType.CUSTOM_OBJECT] = Field(default=ComponentType.CUSTOM_OBJECT)
     sharing_model: str = Field(..., description="Object sharing model")
     deployment_status: str = Field(..., description="Deployment status")
     custom_fields_count: int = Field(default=0, ge=0, description="Number of custom fields")
@@ -191,7 +191,7 @@ class CustomObjectAnalysis(BaseSalesforceComponent):
 
 class CustomFieldAnalysis(BaseSalesforceComponent):
     """Custom field analysis model."""
-    component_type: ComponentType = Field(default=ComponentType.CUSTOM_FIELD, const=True)
+    component_type: Literal[ComponentType.CUSTOM_FIELD] = Field(default=ComponentType.CUSTOM_FIELD)
     sobject_type: str = Field(..., description="Object this field belongs to")
     field_type: str = Field(..., description="Field data type")
     is_required: bool = Field(default=False, description="Whether field is required")

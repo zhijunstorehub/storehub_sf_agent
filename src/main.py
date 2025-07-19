@@ -13,13 +13,20 @@ from rich.text import Text
 # Add src to path for imports
 sys.path.insert(0, str(Path(__file__).parent))
 
-from config import settings, MetadataType, ProcessingMode
-from processing.metadata_processor import ComprehensiveMetadataProcessor
-from salesforce.client import EnhancedSalesforceClient
-from services.graph_service import GraphService
-from services.llm_service import LLMService
-
 console = Console()
+
+try:
+    from config import settings, MetadataType, ProcessingMode
+    from processing.metadata_processor import ComprehensiveMetadataProcessor
+    from salesforce.client import EnhancedSalesforceClient
+    from services.graph_service import GraphService
+    from services.llm_service import LLMService
+    SERVICES_AVAILABLE = True
+except ImportError as e:
+    # Fallback for development
+    console.print("⚠️ [yellow]Running in development mode with limited functionality[/yellow]")
+    console.print(f"[dim]Import error: {e}[/dim]\n")
+    SERVICES_AVAILABLE = False
 
 @click.group()
 @click.version_option(version="2.0.0", prog_name="AI Colleague")
