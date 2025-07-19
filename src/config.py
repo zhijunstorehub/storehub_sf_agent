@@ -43,13 +43,13 @@ class Settings(BaseSettings):
     """Application settings with Phase 2 enhancements."""
     
     # Google Gemini Configuration
-    google_api_key: str
+    google_api_key: Optional[str] = None
     gemini_model: str = "gemini-1.5-pro-latest"
     
     # Neo4j Configuration
-    neo4j_uri: str
+    neo4j_uri: Optional[str] = None
     neo4j_username: str = "neo4j"
-    neo4j_password: str
+    neo4j_password: Optional[str] = None
     neo4j_database: str = "neo4j"
     aura_instanceid: Optional[str] = None
     aura_instancename: Optional[str] = None
@@ -90,8 +90,8 @@ class Settings(BaseSettings):
     metadata_output_directory: str = "output/metadata"
     temp_directory: str = "temp"
     
-    def validate_neo4j_uri(self) -> str:
-        if not self.neo4j_uri.startswith(('neo4j://', 'neo4j+s://', 'bolt://', 'bolt+s://')):
+    def validate_neo4j_uri(self) -> Optional[str]:
+        if self.neo4j_uri and not self.neo4j_uri.startswith(('neo4j://', 'neo4j+s://', 'bolt://', 'bolt+s://')):
             raise ValueError('Neo4j URI must start with neo4j://, neo4j+s://, bolt://, or bolt+s://')
         return self.neo4j_uri
     
@@ -105,8 +105,10 @@ class Settings(BaseSettings):
         return validated_types
     
     @property
-    def neo4j_api_url(self) -> str:
+    def neo4j_api_url(self) -> Optional[str]:
         """Construct Neo4j HTTP API URL from URI."""
+        if not self.neo4j_uri:
+            return None
         base_url = self.neo4j_uri.replace('neo4j+s://', 'https://').replace('neo4j://', 'http://')
         if base_url.endswith('/'):
             base_url = base_url[:-1]

@@ -1,21 +1,52 @@
 """Graph Service for AI Colleague Phase 2."""
 
-import os
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from config import settings
 from typing import List, Dict, Any, Optional
 from rich.console import Console
 
 console = Console()
 
 class GraphService:
-    """Basic graph service for Phase 2."""
+    """Enhanced graph service for Phase 2 with actual Neo4j integration."""
     
     def __init__(self):
         """Initialize graph service."""
-        self.neo4j_uri = os.getenv('NEO4J_URI')
-        self.available = bool(self.neo4j_uri)
+        self.neo4j_uri = settings.neo4j_uri
+        self.neo4j_username = settings.neo4j_username
+        self.neo4j_password = settings.neo4j_password
+        self.neo4j_database = settings.neo4j_database
+        self.available = bool(self.neo4j_uri and self.neo4j_password)
         
-        if not self.available:
+        if self.available:
+            console.print("✅ [green]Neo4j configuration found[/green]")
+            self._initialize_neo4j()
+        else:
             console.print("⚠️ [yellow]Neo4j configuration not found[/yellow]")
+    
+    def _initialize_neo4j(self):
+        """Initialize Neo4j driver."""
+        try:
+            from neo4j import GraphDatabase
+            self.driver = GraphDatabase.driver(
+                self.neo4j_uri,
+                auth=(self.neo4j_username, self.neo4j_password)
+            )
+            # Test connection
+            with self.driver.session(database=self.neo4j_database) as session:
+                result = session.run("RETURN 1 as test")
+                result.single()
+            console.print("✅ [green]Neo4j connection established[/green]")
+        except ImportError:
+            console.print("❌ [red]neo4j package not installed[/red]")
+            console.print("Install with: pip install neo4j")
+            self.available = False
+        except Exception as e:
+            console.print(f"❌ [red]Failed to connect to Neo4j: {e}[/red]")
+            self.available = False
     
     def test_connection(self) -> bool:
         """Test Neo4j connection."""
@@ -23,9 +54,12 @@ class GraphService:
             return False
         
         try:
-            # In a real implementation, this would test Neo4j connection
-            return True
-        except Exception:
+            with self.driver.session(database=self.neo4j_database) as session:
+                result = session.run("RETURN 1 as test")
+                result.single()
+                return True
+        except Exception as e:
+            console.print(f"❌ [red]Neo4j connection test failed: {e}[/red]")
             return False
     
     def create_component_node(self, component: Any) -> bool:
@@ -35,10 +69,28 @@ class GraphService:
             return True
         
         try:
-            # In a real implementation, this would create Neo4j node
-            return True
+            with self.driver.session(database=self.neo4j_database) as session:
+                query = """
+                MERGE (c:Component {api_name: $api_name})
+                SET c.label = $label,
+                    c.component_type = $component_type,
+                    c.risk_level = $risk_level,
+                    c.complexity = $complexity,
+                    c.business_purpose = $business_purpose,
+                    c.last_updated = datetime()
+                RETURN c
+                """
+                session.run(query, {
+                    "api_name": component.api_name,
+                    "label": getattr(component, 'label', component.api_name),
+                    "component_type": component.component_type,
+                    "risk_level": component.risk_assessment.overall_risk if hasattr(component, 'risk_assessment') else 'unknown',
+                    "complexity": component.risk_assessment.complexity if hasattr(component, 'risk_assessment') else 'unknown',
+                    "business_purpose": component.semantic_analysis.business_purpose if hasattr(component, 'semantic_analysis') else 'unknown'
+                })
+                return True
         except Exception as e:
-            console.print(f"❌ [red]Graph Error: {e}[/red]")
+            console.print(f"❌ [red]Graph Error creating node: {e}[/red]")
             return False
     
     def create_dependencies(self, dependencies: List[Any]) -> bool:
