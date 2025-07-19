@@ -1,0 +1,2814 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <assignments>
+        <name>Add_to_Task_Collection</name>
+        <label>Add to Task Collection</label>
+        <locationX>2349</locationX>
+        <locationY>2471</locationY>
+        <assignmentItems>
+            <assignToReference>var_Task_Collection</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>var_Task</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Task_Loop</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assigns BC TL Email to BC TL Email field</description>
+        <name>Assign_BC_TL_Email</name>
+        <label>Assign BC TL Email</label>
+        <locationX>2261</locationX>
+        <locationY>1139</locationY>
+        <assignmentItems>
+            <assignToReference>var_Lead.BC_TL_Email__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.BC_Name__r.Manager.Email</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Check_BC_Email_field</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Individual_Task_Variables</name>
+        <label>Assign Individual Task Variables</label>
+        <locationX>2349</locationX>
+        <locationY>2363</locationY>
+        <assignmentItems>
+            <assignToReference>var_Task.Id</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Task_Loop.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_Task.OwnerId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.OwnerId</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Add_to_Task_Collection</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Lead_Variables</name>
+        <label>Assign Lead Variables</label>
+        <locationX>2393</locationX>
+        <locationY>323</locationY>
+        <assignmentItems>
+            <assignToReference>var_Lead.Id</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_Lead.CurrencyIsoCode</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>LeadCurrency</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_Lead.SC_TL_Email__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.SC_name__r.Manager.Email</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Check_Social_Media_Follower_Criteria</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Copy_1_of_Assign_Lead_Variables</name>
+        <label>Assign Lead Variables</label>
+        <locationX>2261</locationX>
+        <locationY>539</locationY>
+        <assignmentItems>
+            <assignToReference>var_Lead.Social_Media_Fol__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Yes</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Check_Lead_Source_Text</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Copy_2_of_Assign_Lead_Variables</name>
+        <label>Assign Lead Variables</label>
+        <locationX>2261</locationX>
+        <locationY>839</locationY>
+        <assignmentItems>
+            <assignToReference>var_Lead.LeadSource</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Lead_Source_Text__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Check_BC_Name_Exist</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Copy_3_of_Assign_Lead_Variables</name>
+        <label>Assign Lead Variables</label>
+        <locationX>1887</locationX>
+        <locationY>1655</locationY>
+        <assignmentItems>
+            <assignToReference>var_Lead.BC_Name__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_BC_User.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Reassign_Task_When_Lead_Assigned</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Copy_4_of_Assign_Lead_Variables</name>
+        <label>Assign Lead Variables</label>
+        <locationX>2327</locationX>
+        <locationY>1655</locationY>
+        <assignmentItems>
+            <assignToReference>var_Lead.OwnerId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_AM_User.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_Lead.AM_Name__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_AM_User.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Reassign_Task_When_Lead_Assigned</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Copy_5_of_Assign_Lead_Variables</name>
+        <label>Assign Lead Variables</label>
+        <locationX>2261</locationX>
+        <locationY>3047</locationY>
+        <assignmentItems>
+            <assignToReference>var_Lead.Flow_Run__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_Lead.Status</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Unqualified</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_Lead.Unqualified_Reason__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Beep Delivery/ Base Plan (Self Sign Up)</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Check_Industry_if_Business_Type_Is_Changed</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>Base_Plan_Availability</name>
+        <label>Base Plan Availability</label>
+        <locationX>2393</locationX>
+        <locationY>2939</locationY>
+        <defaultConnector>
+            <targetReference>Check_Industry_if_Business_Type_Is_Changed</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes</name>
+            <conditionLogic>(1 OR 2 OR 3 OR 4 OR 5 OR 6 OR 7 OR 8) AND 9 AND 10</conditionLogic>
+            <conditions>
+                <leftValueReference>BasePlan_KualaLumpur_Part1</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Yes</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>BasePlan_KualaLumpur_Part2</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Yes</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>BasePlan_Selangor_Part1</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Yes</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>BasePlan_Selangor_Part2</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Yes</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>BasePlan_Johor</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Yes</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>BasePlan_Negeri_Sembilan</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Yes</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>BasePlan_Penang</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Yes</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>BasePlan_Putrajaya</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Yes</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.LeadSource</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Demo request - beep delivery</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Flow_Run__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Copy_5_of_Assign_Lead_Variables</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_AM_User</name>
+        <label>Check AM User</label>
+        <locationX>2459</locationX>
+        <locationY>1547</locationY>
+        <defaultConnector>
+            <targetReference>Reassign_Task_When_Lead_Assigned</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Active2</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_AM_User.IsActive</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Copy_4_of_Assign_Lead_Variables</targetReference>
+            </connector>
+            <label>Active2</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_BC_Email_field</name>
+        <label>Check Email field</label>
+        <locationX>2393</locationX>
+        <locationY>1331</locationY>
+        <defaultConnector>
+            <targetReference>Reassign_Task_When_Lead_Assigned</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>BC_Email_Has_Value</name>
+            <conditionLogic>1 AND (NOT 2)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.BC_Email__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Lead_Source_Text__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Walk in</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_BC_User</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>BC Email Has Value</label>
+        </rules>
+        <rules>
+            <name>AM_Email_Has_Value</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.AM_Email__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>IsNew</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$User.Email</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record.AM_Email__c</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_AM_User</targetReference>
+            </connector>
+            <label>AM Email Has Value</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_BC_Name_Exist</name>
+        <label>Check BC Name Exist?</label>
+        <locationX>2393</locationX>
+        <locationY>1031</locationY>
+        <defaultConnector>
+            <targetReference>Check_BC_Email_field</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes1</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.BC_Name__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_BC_TL_Email</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_BC_User</name>
+        <label>Check BC User</label>
+        <locationX>2019</locationX>
+        <locationY>1547</locationY>
+        <defaultConnector>
+            <targetReference>Reassign_Task_When_Lead_Assigned</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Active1</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_BC_User.IsActive</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.BC_Email__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record__Prior.BC_Email__c</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Copy_3_of_Assign_Lead_Variables</targetReference>
+            </connector>
+            <label>Active1</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_If_Uncontactable_Since_Beginning</name>
+        <label>Check If Uncontactable Since Beginning</label>
+        <locationX>182</locationX>
+        <locationY>3863</locationY>
+        <defaultConnector>
+            <targetReference>Update_Unqualified_Status_Timestamp</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Not_Uncontactable_Since_Beginning</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Unqualified_Reason__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Lead Quality/ Uncontactable since the beginning</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Copy_1_of_Push_to_EventBridge</targetReference>
+            </connector>
+            <label>Not Uncontactable Since Beginning</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_Industry_if_Business_Type_Is_Changed</name>
+        <label>Check Industry if Business Type Is Changed</label>
+        <locationX>2393</locationX>
+        <locationY>3239</locationY>
+        <defaultConnector>
+            <targetReference>Update_Lead_Variables_to_Lead_Record</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Business_Type_Mapping</name>
+            <conditionLogic>(1 AND 2) OR (3 AND (4 OR 5))</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Business_Type__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Industry</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record.Business_Type_Industry_Hidden__c</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Industry</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Business_Type__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Business_Type_Text__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Lead_Industry_Field</targetReference>
+            </connector>
+            <label>Business Type Mapping</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_Lead_Source_Text</name>
+        <label>Check Lead Source Text</label>
+        <locationX>2393</locationX>
+        <locationY>731</locationY>
+        <defaultConnector>
+            <targetReference>Check_BC_Name_Exist</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Lead_Source_Text_Not_Null</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Lead_Source_Text__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.LeadSource</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Testing</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.LeadSource</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Lost Opp reconnect</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Copy_2_of_Assign_Lead_Variables</targetReference>
+            </connector>
+            <label>Lead Source Text Not Null</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_Social_Media_Follower_Criteria</name>
+        <label>Check Social Media Follower Criteria</label>
+        <locationX>2393</locationX>
+        <locationY>431</locationY>
+        <defaultConnector>
+            <targetReference>Check_Lead_Source_Text</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Criteria_Met</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.aov__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>RM50 and above</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Number_of_Social_Media_Followers__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>3000 and above</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Average_Orders_Per_Day__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>30 and above</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Copy_1_of_Assign_Lead_Variables</targetReference>
+            </connector>
+            <label>Criteria Met</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_Task_Owner</name>
+        <label>Check Task Owner</label>
+        <locationX>2481</locationX>
+        <locationY>2255</locationY>
+        <defaultConnector>
+            <targetReference>Task_Loop</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Wrongly_Assigned</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Task_Loop.OwnerId</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record.OwnerId</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Individual_Task_Variables</targetReference>
+            </connector>
+            <label>Wrongly Assigned</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Contacted_Status_Field_Updates</name>
+        <label>Contacted Status Field Updates</label>
+        <locationX>2470</locationX>
+        <locationY>3755</locationY>
+        <defaultConnectorLabel>Run Upon Each Save in Contacted Status</defaultConnectorLabel>
+        <rules>
+            <name>Run_Once_in_Contacted_Status</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status_Contacted_Timestamp__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Push_to_EventBridge</targetReference>
+            </connector>
+            <label>Run Once in Contacted Status</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Converted_Status_Field_Updates</name>
+        <label>Converted Status Field Updates</label>
+        <locationX>4054</locationX>
+        <locationY>3755</locationY>
+        <defaultConnectorLabel>Run Upon Each Save in Converted Status</defaultConnectorLabel>
+        <rules>
+            <name>Run_Once_in_Converted_Status</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.IsConverted</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_MS_Status_Timestamp_0_0</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>Run Once in Converted Status</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Inbound_Status</name>
+        <label>Inbound Status</label>
+        <locationX>2393</locationX>
+        <locationY>3647</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Unqualified</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Unqualified</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Unqualified_Status_Field_Updates</targetReference>
+            </connector>
+            <label>Unqualified</label>
+        </rules>
+        <rules>
+            <name>New</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>New</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>New_Status_Field_Updates</targetReference>
+            </connector>
+            <label>New</label>
+        </rules>
+        <rules>
+            <name>AC</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Attempted Contact</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_D1_IM_Timestamp_in_AC</targetReference>
+            </connector>
+            <label>AC</label>
+        </rules>
+        <rules>
+            <name>WA_Callback</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>WA Callback</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_D1_IM_Timestamp_0</targetReference>
+            </connector>
+            <label>WA Callback</label>
+        </rules>
+        <rules>
+            <name>Contacted</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Contacted</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Contacted_Status_Field_Updates</targetReference>
+            </connector>
+            <label>Contacted</label>
+        </rules>
+        <rules>
+            <name>Nurturing</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Nurturing</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Nurturing_Status_Field_Updates</targetReference>
+            </connector>
+            <label>Nurturing</label>
+        </rules>
+        <rules>
+            <name>Meeting_Scheduled</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Meeting Scheduled</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>MS_Status_Field_Updates</targetReference>
+            </connector>
+            <label>Meeting Scheduled</label>
+        </rules>
+        <rules>
+            <name>Coverted</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Converted</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Converted_Status_Field_Updates</targetReference>
+            </connector>
+            <label>Coverted</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>MS_Status_Field_Updates</name>
+        <label>MS Status Field Updates</label>
+        <locationX>3526</locationX>
+        <locationY>3755</locationY>
+        <defaultConnectorLabel>Run Upon Each Save in MS Status</defaultConnectorLabel>
+        <rules>
+            <name>Run_Once_in_MS_Status</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status_Meeting_Scheduled_Timestamp__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_MS_Status_Timestamp</targetReference>
+            </connector>
+            <label>Run Once in MS Status</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>For system or time sensitive fields such as Status Timestamps should only be in the path that run once only, else triggers flow that can run upon each save.</description>
+        <name>New_Status_Field_Updates</name>
+        <label>New Status Field Updates</label>
+        <locationX>886</locationX>
+        <locationY>3755</locationY>
+        <defaultConnectorLabel>Run Upon Each Save in New Status</defaultConnectorLabel>
+        <rules>
+            <name>Run_Once_in_New_Status</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status_New_Timestamp__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Status_New_Timestamp_0</targetReference>
+            </connector>
+            <label>Run Once in New Status</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Nurturing_Status_Field_Updates</name>
+        <label>Nurturing Status Field Updates</label>
+        <locationX>2998</locationX>
+        <locationY>3755</locationY>
+        <defaultConnectorLabel>Run Upon Each Save in Nurturing Status</defaultConnectorLabel>
+        <rules>
+            <name>Run_Once_in_Nurturing_Status</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status_Nurturing_Timestamp__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Nurturing_Status_Timestamp</targetReference>
+            </connector>
+            <label>Run Once in Nurturing Status</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Reassign_Task_When_Lead_Assigned</name>
+        <label>Reassign Task When Lead Assigned</label>
+        <locationX>2393</locationX>
+        <locationY>1931</locationY>
+        <defaultConnector>
+            <targetReference>Base_Plan_Availability</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Lead_Assigned_from_Queue</name>
+            <conditionLogic>1 AND NOT 2</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.OwnerId</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.OwnerId</leftValueReference>
+                <operator>StartsWith</operator>
+                <rightValue>
+                    <stringValue>00G</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Open_Tasks</targetReference>
+            </connector>
+            <label>Lead Assigned from Queue</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Unqualified_Status_Field_Updates</name>
+        <label>Unqualified Status Field Updates</label>
+        <locationX>336</locationX>
+        <locationY>3755</locationY>
+        <defaultConnectorLabel>Run Upon Each Save in Unqualified Status</defaultConnectorLabel>
+        <rules>
+            <name>Run_Once_in_Unqualified_Status</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status_Unqualified_Timestamp__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Unqualified</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Check_If_Uncontactable_Since_Beginning</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>Run Once in Unqualified Status</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>WA_Callback_Status_Field_Updates</name>
+        <label>WA Callback Status Field Updates</label>
+        <locationX>1942</locationX>
+        <locationY>4079</locationY>
+        <defaultConnectorLabel>Run Upon Each Save in WA Callback</defaultConnectorLabel>
+        <rules>
+            <name>Run_Once_in_WA_Callback</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status_WA_Callback_Timestamp__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Status_WA_Callback_Timestamp_0_0</targetReference>
+            </connector>
+            <label>Run Once in WA Callback</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X2nd_Call_Task_Trigger_0</name>
+        <label>2nd Call Task Trigger</label>
+        <locationX>1414</locationX>
+        <locationY>4079</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>AC_Timestamp</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Attempted Contact</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status_Attempted_Contact_Timestamp__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_AC_Status_Timestamp_0_0</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>AC Timestamp</label>
+        </rules>
+    </decisions>
+    <description>Changes by ZJ:
+1. Changed the condition to map BC Name from checking if the BC Name is empty to checking if the BC email was not same as before. This is to accomodate the rescheduling.</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>BasePlan_Johor</name>
+        <dataType>String</dataType>
+        <expression>CASE({!$Record.PostalCode},&quot;79000&quot;,&quot;Yes&quot;
+,&quot;79100&quot;,&quot;Yes&quot;
+,&quot;79150&quot;,&quot;Yes&quot;
+,&quot;79200&quot;,&quot;Yes&quot;
+,&quot;79250&quot;,&quot;Yes&quot;
+,&quot;79502&quot;,&quot;Yes&quot;
+,&quot;79503&quot;,&quot;Yes&quot;
+,&quot;79504&quot;,&quot;Yes&quot;
+,&quot;79505&quot;,&quot;Yes&quot;
+,&quot;79511&quot;,&quot;Yes&quot;
+,&quot;79513&quot;,&quot;Yes&quot;
+,&quot;79514&quot;,&quot;Yes&quot;
+,&quot;79517&quot;,&quot;Yes&quot;
+,&quot;79518&quot;,&quot;Yes&quot;
+,&quot;79520&quot;,&quot;Yes&quot;
+,&quot;79521&quot;,&quot;Yes&quot;
+,&quot;79523&quot;,&quot;Yes&quot;
+,&quot;79532&quot;,&quot;Yes&quot;
+,&quot;79538&quot;,&quot;Yes&quot;
+,&quot;79540&quot;,&quot;Yes&quot;
+,&quot;79546&quot;,&quot;Yes&quot;
+,&quot;79548&quot;,&quot;Yes&quot;
+,&quot;79550&quot;,&quot;Yes&quot;
+,&quot;79552&quot;,&quot;Yes&quot;
+,&quot;79555&quot;,&quot;Yes&quot;
+,&quot;79570&quot;,&quot;Yes&quot;
+,&quot;79575&quot;,&quot;Yes&quot;
+,&quot;79576&quot;,&quot;Yes&quot;
+,&quot;79592&quot;,&quot;Yes&quot;
+,&quot;79601&quot;,&quot;Yes&quot;
+,&quot;79603&quot;,&quot;Yes&quot;
+,&quot;79605&quot;,&quot;Yes&quot;
+,&quot;79606&quot;,&quot;Yes&quot;
+,&quot;79612&quot;,&quot;Yes&quot;
+,&quot;79626&quot;,&quot;Yes&quot;
+,&quot;79630&quot;,&quot;Yes&quot;
+,&quot;79632&quot;,&quot;Yes&quot;
+,&quot;79646&quot;,&quot;Yes&quot;
+,&quot;79658&quot;,&quot;Yes&quot;
+,&quot;79660&quot;,&quot;Yes&quot;
+,&quot;79680&quot;,&quot;Yes&quot;
+,&quot;79681&quot;,&quot;Yes&quot;
+,&quot;79683&quot;,&quot;Yes&quot;
+,&quot;80000&quot;,&quot;Yes&quot;
+,&quot;80050&quot;,&quot;Yes&quot;
+,&quot;80050&quot;,&quot;Yes&quot;
+,&quot;80100&quot;,&quot;Yes&quot;
+,&quot;80150&quot;,&quot;Yes&quot;
+,&quot;80150&quot;,&quot;Yes&quot;
+,&quot;80200&quot;,&quot;Yes&quot;
+,&quot;80250&quot;,&quot;Yes&quot;
+,&quot;80250&quot;,&quot;Yes&quot;
+,&quot;80300&quot;,&quot;Yes&quot;
+,&quot;80350&quot;,&quot;Yes&quot;
+,&quot;80400&quot;,&quot;Yes&quot;
+,&quot;80400&quot;,&quot;Yes&quot;
+,&quot;80500&quot;,&quot;Yes&quot;
+,&quot;80500&quot;,&quot;Yes&quot;
+,&quot;80506&quot;,&quot;Yes&quot;
+,&quot;80508&quot;,&quot;Yes&quot;
+,&quot;80516&quot;,&quot;Yes&quot;
+,&quot;80519&quot;,&quot;Yes&quot;
+,&quot;80534&quot;,&quot;Yes&quot;
+,&quot;80536&quot;,&quot;Yes&quot;
+,&quot;80542&quot;,&quot;Yes&quot;
+,&quot;80546&quot;,&quot;Yes&quot;
+,&quot;80558&quot;,&quot;Yes&quot;
+,&quot;80560&quot;,&quot;Yes&quot;
+,&quot;80564&quot;,&quot;Yes&quot;
+,&quot;80568&quot;,&quot;Yes&quot;
+,&quot;80578&quot;,&quot;Yes&quot;
+,&quot;80584&quot;,&quot;Yes&quot;
+,&quot;80586&quot;,&quot;Yes&quot;
+,&quot;80590&quot;,&quot;Yes&quot;
+,&quot;80592&quot;,&quot;Yes&quot;
+,&quot;80594&quot;,&quot;Yes&quot;
+,&quot;80596&quot;,&quot;Yes&quot;
+,&quot;80600&quot;,&quot;Yes&quot;
+,&quot;80604&quot;,&quot;Yes&quot;
+,&quot;80608&quot;,&quot;Yes&quot;
+,&quot;80620&quot;,&quot;Yes&quot;
+,&quot;80622&quot;,&quot;Yes&quot;
+,&quot;80628&quot;,&quot;Yes&quot;
+,&quot;80644&quot;,&quot;Yes&quot;
+,&quot;80648&quot;,&quot;Yes&quot;
+,&quot;80662&quot;,&quot;Yes&quot;
+,&quot;80664&quot;,&quot;Yes&quot;
+,&quot;80668&quot;,&quot;Yes&quot;
+,&quot;80670&quot;,&quot;Yes&quot;
+,&quot;80672&quot;,&quot;Yes&quot;
+,&quot;80673&quot;,&quot;Yes&quot;
+,&quot;80676&quot;,&quot;Yes&quot;
+,&quot;80700&quot;,&quot;Yes&quot;
+,&quot;80710&quot;,&quot;Yes&quot;
+,&quot;80720&quot;,&quot;Yes&quot;
+,&quot;80730&quot;,&quot;Yes&quot;
+,&quot;80900&quot;,&quot;Yes&quot;
+,&quot;80902&quot;,&quot;Yes&quot;
+,&quot;80904&quot;,&quot;Yes&quot;
+,&quot;80906&quot;,&quot;Yes&quot;
+,&quot;80908&quot;,&quot;Yes&quot;
+,&quot;80988&quot;,&quot;Yes&quot;
+,&quot;80990&quot;,&quot;Yes&quot;
+,&quot;80990&quot;,&quot;Yes&quot;
+,&quot;81000&quot;,&quot;Yes&quot;
+,&quot;81100&quot;,&quot;Yes&quot;
+,&quot;81100&quot;,&quot;Yes&quot;
+,&quot;81100&quot;,&quot;Yes&quot;
+,&quot;81110&quot;,&quot;Yes&quot;
+,&quot;81200&quot;,&quot;Yes&quot;
+,&quot;81200&quot;,&quot;Yes&quot;
+,&quot;81200&quot;,&quot;Yes&quot;
+,&quot;81300&quot;,&quot;Yes&quot;
+,&quot;81300&quot;,&quot;Yes&quot;
+,&quot;81310&quot;,&quot;Yes&quot;
+,&quot;81310&quot;,&quot;Yes&quot;
+,&quot;81400&quot;,&quot;Yes&quot;
+,&quot;81550&quot;,&quot;Yes&quot;
+,&quot;81700&quot;,&quot;Yes&quot;
+,&quot;81700&quot;,&quot;Yes&quot;
+,&quot;81750&quot;,&quot;Yes&quot;
+,&quot;81750&quot;,&quot;Yes&quot;
+,&quot;81760&quot;,&quot;Yes&quot;
+,&quot;81800&quot;,&quot;Yes&quot;
+,&quot;81800&quot;,&quot;Yes&quot;
+,&quot;81850&quot;,&quot;Yes&quot;
+,&quot;81850&quot;,&quot;Yes&quot;
+,&quot;81850&quot;,&quot;Yes&quot;
+,&quot;84000&quot;,&quot;Yes&quot;
+,&quot;84900&quot;,&quot;Yes&quot;,&quot;No&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>BasePlan_KualaLumpur_Part1</name>
+        <dataType>String</dataType>
+        <expression>CASE({!$Record.PostalCode},&quot;50000&quot;,&quot;Yes&quot;
+,&quot;50050&quot;,&quot;Yes&quot;
+,&quot;50088&quot;,&quot;Yes&quot;
+,&quot;50100&quot;,&quot;Yes&quot;
+,&quot;50150&quot;,&quot;Yes&quot;
+,&quot;50200&quot;,&quot;Yes&quot;
+,&quot;50250&quot;,&quot;Yes&quot;
+,&quot;50300&quot;,&quot;Yes&quot;
+,&quot;50350&quot;,&quot;Yes&quot;
+,&quot;50400&quot;,&quot;Yes&quot;
+,&quot;50420&quot;,&quot;Yes&quot;
+,&quot;50450&quot;,&quot;Yes&quot;
+,&quot;50460&quot;,&quot;Yes&quot;
+,&quot;50470&quot;,&quot;Yes&quot;
+,&quot;50480&quot;,&quot;Yes&quot;
+,&quot;50489&quot;,&quot;Yes&quot;
+,&quot;50490&quot;,&quot;Yes&quot;
+,&quot;50500&quot;,&quot;Yes&quot;
+,&quot;50502&quot;,&quot;Yes&quot;
+,&quot;50504&quot;,&quot;Yes&quot;
+,&quot;50505&quot;,&quot;Yes&quot;
+,&quot;50506&quot;,&quot;Yes&quot;
+,&quot;50507&quot;,&quot;Yes&quot;
+,&quot;50508&quot;,&quot;Yes&quot;
+,&quot;50512&quot;,&quot;Yes&quot;
+,&quot;50514&quot;,&quot;Yes&quot;
+,&quot;50515&quot;,&quot;Yes&quot;
+,&quot;50519&quot;,&quot;Yes&quot;
+,&quot;50528&quot;,&quot;Yes&quot;
+,&quot;50529&quot;,&quot;Yes&quot;
+,&quot;50530&quot;,&quot;Yes&quot;
+,&quot;50532&quot;,&quot;Yes&quot;
+,&quot;50534&quot;,&quot;Yes&quot;
+,&quot;50536&quot;,&quot;Yes&quot;
+,&quot;50538&quot;,&quot;Yes&quot;
+,&quot;50540&quot;,&quot;Yes&quot;
+,&quot;50544&quot;,&quot;Yes&quot;
+,&quot;50546&quot;,&quot;Yes&quot;
+,&quot;50548&quot;,&quot;Yes&quot;
+,&quot;50550&quot;,&quot;Yes&quot;
+,&quot;50551&quot;,&quot;Yes&quot;
+,&quot;50552&quot;,&quot;Yes&quot;
+,&quot;50554&quot;,&quot;Yes&quot;
+,&quot;50556&quot;,&quot;Yes&quot;
+,&quot;50560&quot;,&quot;Yes&quot;
+,&quot;50562&quot;,&quot;Yes&quot;
+,&quot;50564&quot;,&quot;Yes&quot;
+,&quot;50566&quot;,&quot;Yes&quot;
+,&quot;50568&quot;,&quot;Yes&quot;
+,&quot;50572&quot;,&quot;Yes&quot;
+,&quot;50576&quot;,&quot;Yes&quot;
+,&quot;50578&quot;,&quot;Yes&quot;
+,&quot;50580&quot;,&quot;Yes&quot;
+,&quot;50582&quot;,&quot;Yes&quot;
+,&quot;50586&quot;,&quot;Yes&quot;
+,&quot;50588&quot;,&quot;Yes&quot;
+,&quot;50590&quot;,&quot;Yes&quot;
+,&quot;50592&quot;,&quot;Yes&quot;
+,&quot;50594&quot;,&quot;Yes&quot;
+,&quot;50596&quot;,&quot;Yes&quot;
+,&quot;50598&quot;,&quot;Yes&quot;
+,&quot;50599&quot;,&quot;Yes&quot;
+,&quot;50600&quot;,&quot;Yes&quot;
+,&quot;50603&quot;,&quot;Yes&quot;
+,&quot;50604&quot;,&quot;Yes&quot;
+,&quot;50605&quot;,&quot;Yes&quot;
+,&quot;50608&quot;,&quot;Yes&quot;
+,&quot;50609&quot;,&quot;Yes&quot;
+,&quot;50610&quot;,&quot;Yes&quot;
+,&quot;50612&quot;,&quot;Yes&quot;
+,&quot;50614&quot;,&quot;Yes&quot;
+,&quot;50620&quot;,&quot;Yes&quot;
+,&quot;50621&quot;,&quot;Yes&quot;
+,&quot;50622&quot;,&quot;Yes&quot;
+,&quot;50623&quot;,&quot;Yes&quot;
+,&quot;50626&quot;,&quot;Yes&quot;
+,&quot;50630&quot;,&quot;Yes&quot;
+,&quot;50632&quot;,&quot;Yes&quot;
+,&quot;50634&quot;,&quot;Yes&quot;
+,&quot;50636&quot;,&quot;Yes&quot;
+,&quot;50638&quot;,&quot;Yes&quot;
+,&quot;50640&quot;,&quot;Yes&quot;
+,&quot;50642&quot;,&quot;Yes&quot;
+,&quot;50644&quot;,&quot;Yes&quot;
+,&quot;50646&quot;,&quot;Yes&quot;
+,&quot;50648&quot;,&quot;Yes&quot;
+,&quot;50650&quot;,&quot;Yes&quot;
+,&quot;50652&quot;,&quot;Yes&quot;
+,&quot;50653&quot;,&quot;Yes&quot;
+,&quot;50656&quot;,&quot;Yes&quot;
+,&quot;50658&quot;,&quot;Yes&quot;
+,&quot;50660&quot;,&quot;Yes&quot;
+,&quot;50661&quot;,&quot;Yes&quot;
+,&quot;50662&quot;,&quot;Yes&quot;
+,&quot;50664&quot;,&quot;Yes&quot;
+,&quot;50666&quot;,&quot;Yes&quot;
+,&quot;50668&quot;,&quot;Yes&quot;
+,&quot;50670&quot;,&quot;Yes&quot;
+,&quot;50672&quot;,&quot;Yes&quot;
+,&quot;50673&quot;,&quot;Yes&quot;
+,&quot;50674&quot;,&quot;Yes&quot;
+,&quot;50676&quot;,&quot;Yes&quot;
+,&quot;50677&quot;,&quot;Yes&quot;
+,&quot;50678&quot;,&quot;Yes&quot;
+,&quot;50680&quot;,&quot;Yes&quot;
+,&quot;50682&quot;,&quot;Yes&quot;
+,&quot;50684&quot;,&quot;Yes&quot;
+,&quot;50688&quot;,&quot;Yes&quot;
+,&quot;50694&quot;,&quot;Yes&quot;
+,&quot;50700&quot;,&quot;Yes&quot;
+,&quot;50702&quot;,&quot;Yes&quot;
+,&quot;50704&quot;,&quot;Yes&quot;
+,&quot;50706&quot;,&quot;Yes&quot;
+,&quot;50708&quot;,&quot;Yes&quot;
+,&quot;50710&quot;,&quot;Yes&quot;
+,&quot;50712&quot;,&quot;Yes&quot;
+,&quot;50714&quot;,&quot;Yes&quot;
+,&quot;50716&quot;,&quot;Yes&quot;
+,&quot;50718&quot;,&quot;Yes&quot;
+,&quot;50720&quot;,&quot;Yes&quot;
+,&quot;50722&quot;,&quot;Yes&quot;
+,&quot;50724&quot;,&quot;Yes&quot;
+,&quot;50726&quot;,&quot;Yes&quot;
+,&quot;50728&quot;,&quot;Yes&quot;
+,&quot;50730&quot;,&quot;Yes&quot;
+,&quot;50732&quot;,&quot;Yes&quot;
+,&quot;50734&quot;,&quot;Yes&quot;
+,&quot;50736&quot;,&quot;Yes&quot;
+,&quot;50738&quot;,&quot;Yes&quot;
+,&quot;50740&quot;,&quot;Yes&quot;
+,&quot;50742&quot;,&quot;Yes&quot;
+,&quot;50744&quot;,&quot;Yes&quot;
+,&quot;50746&quot;,&quot;Yes&quot;
+,&quot;50748&quot;,&quot;Yes&quot;
+,&quot;50750&quot;,&quot;Yes&quot;
+,&quot;50752&quot;,&quot;Yes&quot;
+,&quot;50754&quot;,&quot;Yes&quot;
+,&quot;50758&quot;,&quot;Yes&quot;
+,&quot;50760&quot;,&quot;Yes&quot;
+,&quot;50762&quot;,&quot;Yes&quot;
+,&quot;50764&quot;,&quot;Yes&quot;
+,&quot;50766&quot;,&quot;Yes&quot;
+,&quot;50768&quot;,&quot;Yes&quot;
+,&quot;50770&quot;,&quot;Yes&quot;
+,&quot;50772&quot;,&quot;Yes&quot;
+,&quot;50774&quot;,&quot;Yes&quot;
+,&quot;50776&quot;,&quot;Yes&quot;
+,&quot;50778&quot;,&quot;Yes&quot;
+,&quot;50780&quot;,&quot;Yes&quot;
+,&quot;50782&quot;,&quot;Yes&quot;
+,&quot;50784&quot;,&quot;Yes&quot;
+,&quot;50786&quot;,&quot;Yes&quot;
+,&quot;50788&quot;,&quot;Yes&quot;
+,&quot;50790&quot;,&quot;Yes&quot;
+,&quot;50792&quot;,&quot;Yes&quot;
+,&quot;50794&quot;,&quot;Yes&quot;
+,&quot;50796&quot;,&quot;Yes&quot;
+,&quot;50798&quot;,&quot;Yes&quot;
+,&quot;50800&quot;,&quot;Yes&quot;
+,&quot;50802&quot;,&quot;Yes&quot;
+,&quot;50804&quot;,&quot;Yes&quot;
+,&quot;50806&quot;,&quot;Yes&quot;
+,&quot;50808&quot;,&quot;Yes&quot;
+,&quot;50810&quot;,&quot;Yes&quot;
+,&quot;50812&quot;,&quot;Yes&quot;
+,&quot;50814&quot;,&quot;Yes&quot;
+,&quot;50816&quot;,&quot;Yes&quot;
+,&quot;50818&quot;,&quot;Yes&quot;
+,&quot;50901&quot;,&quot;Yes&quot;
+,&quot;50902&quot;,&quot;Yes&quot;
+,&quot;50903&quot;,&quot;Yes&quot;
+,&quot;50904&quot;,&quot;Yes&quot;
+,&quot;50906&quot;,&quot;Yes&quot;
+,&quot;50907&quot;,&quot;Yes&quot;
+,&quot;50908&quot;,&quot;Yes&quot;
+,&quot;50909&quot;,&quot;Yes&quot;
+,&quot;50910&quot;,&quot;Yes&quot;
+,&quot;50911&quot;,&quot;Yes&quot;
+,&quot;50912&quot;,&quot;Yes&quot;
+,&quot;50913&quot;,&quot;Yes&quot;
+,&quot;50914&quot;,&quot;Yes&quot;
+,&quot;50915&quot;,&quot;Yes&quot;
+,&quot;50916&quot;,&quot;Yes&quot;
+,&quot;50917&quot;,&quot;Yes&quot;
+,&quot;50918&quot;,&quot;Yes&quot;
+,&quot;50919&quot;,&quot;Yes&quot;
+,&quot;50920&quot;,&quot;Yes&quot;
+,&quot;50921&quot;,&quot;Yes&quot;
+,&quot;50922&quot;,&quot;Yes&quot;
+,&quot;50923&quot;,&quot;Yes&quot;
+,&quot;50924&quot;,&quot;Yes&quot;
+,&quot;50925&quot;,&quot;Yes&quot;
+,&quot;50926&quot;,&quot;Yes&quot;
+,&quot;50927&quot;,&quot;Yes&quot;
+,&quot;50928&quot;,&quot;Yes&quot;
+,&quot;50929&quot;,&quot;Yes&quot;
+,&quot;50930&quot;,&quot;Yes&quot;
+,&quot;50931&quot;,&quot;Yes&quot;
+,&quot;50932&quot;,&quot;Yes&quot;
+,&quot;50933&quot;,&quot;Yes&quot;
+,&quot;50934&quot;,&quot;Yes&quot;
+,&quot;50935&quot;,&quot;Yes&quot;
+,&quot;50936&quot;,&quot;Yes&quot;
+,&quot;50937&quot;,&quot;Yes&quot;
+,&quot;50938&quot;,&quot;Yes&quot;
+,&quot;50939&quot;,&quot;Yes&quot;
+,&quot;50940&quot;,&quot;Yes&quot;
+,&quot;50941&quot;,&quot;Yes&quot;
+,&quot;50942&quot;,&quot;Yes&quot;
+,&quot;50943&quot;,&quot;Yes&quot;
+,&quot;50944&quot;,&quot;Yes&quot;
+,&quot;50945&quot;,&quot;Yes&quot;
+,&quot;50946&quot;,&quot;Yes&quot;
+,&quot;50947&quot;,&quot;Yes&quot;
+,&quot;50948&quot;,&quot;Yes&quot;
+,&quot;50949&quot;,&quot;Yes&quot;
+,&quot;50950&quot;,&quot;Yes&quot;
+,&quot;50988&quot;,&quot;Yes&quot;
+,&quot;50989&quot;,&quot;Yes&quot;
+,&quot;50990&quot;,&quot;Yes&quot;,&quot;No&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>BasePlan_KualaLumpur_Part2</name>
+        <dataType>String</dataType>
+        <expression>CASE({!$Record.PostalCode},&quot;51000&quot;,&quot;Yes&quot;
+,&quot;51100&quot;,&quot;Yes&quot;
+,&quot;51200&quot;,&quot;Yes&quot;
+,&quot;51300&quot;,&quot;Yes&quot;
+,&quot;51640&quot;,&quot;Yes&quot;
+,&quot;51700&quot;,&quot;Yes&quot;
+,&quot;51800&quot;,&quot;Yes&quot;
+,&quot;51900&quot;,&quot;Yes&quot;
+,&quot;51990&quot;,&quot;Yes&quot;
+,&quot;52000&quot;,&quot;Yes&quot;
+,&quot;52100&quot;,&quot;Yes&quot;
+,&quot;52109&quot;,&quot;Yes&quot;
+,&quot;52200&quot;,&quot;Yes&quot;
+,&quot;52210&quot;,&quot;Yes&quot;
+,&quot;53000&quot;,&quot;Yes&quot;
+,&quot;53100&quot;,&quot;Yes&quot;
+,&quot;53200&quot;,&quot;Yes&quot;
+,&quot;53300&quot;,&quot;Yes&quot;
+,&quot;53500&quot;,&quot;Yes&quot;
+,&quot;53700&quot;,&quot;Yes&quot;
+,&quot;53800&quot;,&quot;Yes&quot;
+,&quot;53990&quot;,&quot;Yes&quot;
+,&quot;54000&quot;,&quot;Yes&quot;
+,&quot;54100&quot;,&quot;Yes&quot;
+,&quot;54200&quot;,&quot;Yes&quot;
+,&quot;54540&quot;,&quot;Yes&quot;
+,&quot;55000&quot;,&quot;Yes&quot;
+,&quot;55100&quot;,&quot;Yes&quot;
+,&quot;55200&quot;,&quot;Yes&quot;
+,&quot;55220&quot;,&quot;Yes&quot;
+,&quot;55300&quot;,&quot;Yes&quot;
+,&quot;55330&quot;,&quot;Yes&quot;
+,&quot;55700&quot;,&quot;Yes&quot;
+,&quot;55710&quot;,&quot;Yes&quot;
+,&quot;55720&quot;,&quot;Yes&quot;
+,&quot;55900&quot;,&quot;Yes&quot;
+,&quot;55902&quot;,&quot;Yes&quot;
+,&quot;55904&quot;,&quot;Yes&quot;
+,&quot;55906&quot;,&quot;Yes&quot;
+,&quot;55908&quot;,&quot;Yes&quot;
+,&quot;55910&quot;,&quot;Yes&quot;
+,&quot;55912&quot;,&quot;Yes&quot;
+,&quot;55914&quot;,&quot;Yes&quot;
+,&quot;55916&quot;,&quot;Yes&quot;
+,&quot;55918&quot;,&quot;Yes&quot;
+,&quot;55920&quot;,&quot;Yes&quot;
+,&quot;55922&quot;,&quot;Yes&quot;
+,&quot;55924&quot;,&quot;Yes&quot;
+,&quot;55926&quot;,&quot;Yes&quot;
+,&quot;55928&quot;,&quot;Yes&quot;
+,&quot;55930&quot;,&quot;Yes&quot;
+,&quot;55932&quot;,&quot;Yes&quot;
+,&quot;55934&quot;,&quot;Yes&quot;
+,&quot;55990&quot;,&quot;Yes&quot;
+,&quot;56000&quot;,&quot;Yes&quot;
+,&quot;56000&quot;,&quot;Yes&quot;
+,&quot;56100&quot;,&quot;Yes&quot;
+,&quot;56100&quot;,&quot;Yes&quot;
+,&quot;57000&quot;,&quot;Yes&quot;
+,&quot;57100&quot;,&quot;Yes&quot;
+,&quot;57200&quot;,&quot;Yes&quot;
+,&quot;57700&quot;,&quot;Yes&quot;
+,&quot;57990&quot;,&quot;Yes&quot;
+,&quot;58000&quot;,&quot;Yes&quot;
+,&quot;58100&quot;,&quot;Yes&quot;
+,&quot;58200&quot;,&quot;Yes&quot;
+,&quot;58209&quot;,&quot;Yes&quot;
+,&quot;58700&quot;,&quot;Yes&quot;
+,&quot;58990&quot;,&quot;Yes&quot;
+,&quot;59000&quot;,&quot;Yes&quot;
+,&quot;59000&quot;,&quot;Yes&quot;
+,&quot;59001&quot;,&quot;Yes&quot;
+,&quot;59100&quot;,&quot;Yes&quot;
+,&quot;59200&quot;,&quot;Yes&quot;
+,&quot;59206&quot;,&quot;Yes&quot;
+,&quot;59700&quot;,&quot;Yes&quot;
+,&quot;59800&quot;,&quot;Yes&quot;
+,&quot;59990&quot;,&quot;Yes&quot;
+,&quot;60000&quot;,&quot;Yes&quot;
+,&quot;68000&quot;,&quot;Yes&quot;
+,&quot;68100&quot;,&quot;Yes&quot;,&quot;No&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>BasePlan_Negeri_Sembilan</name>
+        <dataType>String</dataType>
+        <expression>CASE({!$Record.PostalCode},&quot;71760&quot;,&quot;Yes&quot;
+,&quot;71800&quot;,&quot;Yes&quot;
+,&quot;71809&quot;,&quot;Yes&quot;,&quot;No&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>BasePlan_Penang</name>
+        <dataType>String</dataType>
+        <expression>CASE({!$Record.PostalCode},&quot;10000&quot;,&quot;Yes&quot;
+,&quot;10050&quot;,&quot;Yes&quot;
+,&quot;10100&quot;,&quot;Yes&quot;
+,&quot;10150&quot;,&quot;Yes&quot;
+,&quot;10200&quot;,&quot;Yes&quot;
+,&quot;10250&quot;,&quot;Yes&quot;
+,&quot;10300&quot;,&quot;Yes&quot;
+,&quot;10350&quot;,&quot;Yes&quot;
+,&quot;10400&quot;,&quot;Yes&quot;
+,&quot;10450&quot;,&quot;Yes&quot;
+,&quot;10460&quot;,&quot;Yes&quot;
+,&quot;10470&quot;,&quot;Yes&quot;
+,&quot;10500&quot;,&quot;Yes&quot;
+,&quot;10502&quot;,&quot;Yes&quot;
+,&quot;10503&quot;,&quot;Yes&quot;
+,&quot;10504&quot;,&quot;Yes&quot;
+,&quot;10505&quot;,&quot;Yes&quot;
+,&quot;10506&quot;,&quot;Yes&quot;
+,&quot;10508&quot;,&quot;Yes&quot;
+,&quot;10512&quot;,&quot;Yes&quot;
+,&quot;10514&quot;,&quot;Yes&quot;
+,&quot;10516&quot;,&quot;Yes&quot;
+,&quot;10518&quot;,&quot;Yes&quot;
+,&quot;10524&quot;,&quot;Yes&quot;
+,&quot;10534&quot;,&quot;Yes&quot;
+,&quot;10538&quot;,&quot;Yes&quot;
+,&quot;10540&quot;,&quot;Yes&quot;
+,&quot;10542&quot;,&quot;Yes&quot;
+,&quot;10546&quot;,&quot;Yes&quot;
+,&quot;10550&quot;,&quot;Yes&quot;
+,&quot;10551&quot;,&quot;Yes&quot;
+,&quot;10552&quot;,&quot;Yes&quot;
+,&quot;10558&quot;,&quot;Yes&quot;
+,&quot;10560&quot;,&quot;Yes&quot;
+,&quot;10564&quot;,&quot;Yes&quot;
+,&quot;10566&quot;,&quot;Yes&quot;
+,&quot;10570&quot;,&quot;Yes&quot;
+,&quot;10576&quot;,&quot;Yes&quot;
+,&quot;10578&quot;,&quot;Yes&quot;
+,&quot;10582&quot;,&quot;Yes&quot;
+,&quot;10590&quot;,&quot;Yes&quot;
+,&quot;10592&quot;,&quot;Yes&quot;
+,&quot;10593&quot;,&quot;Yes&quot;
+,&quot;10594&quot;,&quot;Yes&quot;
+,&quot;10596&quot;,&quot;Yes&quot;
+,&quot;10600&quot;,&quot;Yes&quot;
+,&quot;10604&quot;,&quot;Yes&quot;
+,&quot;10609&quot;,&quot;Yes&quot;
+,&quot;10610&quot;,&quot;Yes&quot;
+,&quot;10612&quot;,&quot;Yes&quot;
+,&quot;10620&quot;,&quot;Yes&quot;
+,&quot;10622&quot;,&quot;Yes&quot;
+,&quot;10626&quot;,&quot;Yes&quot;
+,&quot;10628&quot;,&quot;Yes&quot;
+,&quot;10634&quot;,&quot;Yes&quot;
+,&quot;10646&quot;,&quot;Yes&quot;
+,&quot;10648&quot;,&quot;Yes&quot;
+,&quot;10660&quot;,&quot;Yes&quot;
+,&quot;10661&quot;,&quot;Yes&quot;
+,&quot;10662&quot;,&quot;Yes&quot;
+,&quot;10670&quot;,&quot;Yes&quot;
+,&quot;10672&quot;,&quot;Yes&quot;
+,&quot;10673&quot;,&quot;Yes&quot;
+,&quot;10674&quot;,&quot;Yes&quot;
+,&quot;10676&quot;,&quot;Yes&quot;
+,&quot;10690&quot;,&quot;Yes&quot;
+,&quot;10710&quot;,&quot;Yes&quot;
+,&quot;10720&quot;,&quot;Yes&quot;
+,&quot;10730&quot;,&quot;Yes&quot;
+,&quot;10740&quot;,&quot;Yes&quot;
+,&quot;10750&quot;,&quot;Yes&quot;
+,&quot;10760&quot;,&quot;Yes&quot;
+,&quot;10770&quot;,&quot;Yes&quot;
+,&quot;10780&quot;,&quot;Yes&quot;
+,&quot;10790&quot;,&quot;Yes&quot;
+,&quot;10800&quot;,&quot;Yes&quot;
+,&quot;10810&quot;,&quot;Yes&quot;
+,&quot;10820&quot;,&quot;Yes&quot;
+,&quot;10830&quot;,&quot;Yes&quot;
+,&quot;10840&quot;,&quot;Yes&quot;
+,&quot;10850&quot;,&quot;Yes&quot;
+,&quot;10910&quot;,&quot;Yes&quot;
+,&quot;10920&quot;,&quot;Yes&quot;
+,&quot;10990&quot;,&quot;Yes&quot;
+,&quot;11000&quot;,&quot;Yes&quot;
+,&quot;11010&quot;,&quot;Yes&quot;
+,&quot;11020&quot;,&quot;Yes&quot;
+,&quot;11050&quot;,&quot;Yes&quot;
+,&quot;11060&quot;,&quot;Yes&quot;
+,&quot;11100&quot;,&quot;Yes&quot;
+,&quot;11200&quot;,&quot;Yes&quot;
+,&quot;11300&quot;,&quot;Yes&quot;
+,&quot;11400&quot;,&quot;Yes&quot;
+,&quot;11409&quot;,&quot;Yes&quot;
+,&quot;11500&quot;,&quot;Yes&quot;
+,&quot;11600&quot;,&quot;Yes&quot;
+,&quot;11609&quot;,&quot;Yes&quot;
+,&quot;11700&quot;,&quot;Yes&quot;
+,&quot;11800&quot;,&quot;Yes&quot;
+,&quot;11900&quot;,&quot;Yes&quot;
+,&quot;11900&quot;,&quot;Yes&quot;
+,&quot;11910&quot;,&quot;Yes&quot;
+,&quot;11920&quot;,&quot;Yes&quot;
+,&quot;11950&quot;,&quot;Yes&quot;
+,&quot;11960&quot;,&quot;Yes&quot;
+,&quot;12000&quot;,&quot;Yes&quot;
+,&quot;12100&quot;,&quot;Yes&quot;
+,&quot;12200&quot;,&quot;Yes&quot;
+,&quot;12300&quot;,&quot;Yes&quot;
+,&quot;12700&quot;,&quot;Yes&quot;
+,&quot;12710&quot;,&quot;Yes&quot;
+,&quot;12720&quot;,&quot;Yes&quot;
+,&quot;12990&quot;,&quot;Yes&quot;
+,&quot;13000&quot;,&quot;Yes&quot;
+,&quot;13009&quot;,&quot;Yes&quot;
+,&quot;13020&quot;,&quot;Yes&quot;
+,&quot;13050&quot;,&quot;Yes&quot;
+,&quot;13100&quot;,&quot;Yes&quot;
+,&quot;13110&quot;,&quot;Yes&quot;
+,&quot;13200&quot;,&quot;Yes&quot;
+,&quot;13210&quot;,&quot;Yes&quot;
+,&quot;13220&quot;,&quot;Yes&quot;
+,&quot;13300&quot;,&quot;Yes&quot;
+,&quot;13310&quot;,&quot;Yes&quot;
+,&quot;13400&quot;,&quot;Yes&quot;
+,&quot;13409&quot;,&quot;Yes&quot;
+,&quot;13500&quot;,&quot;Yes&quot;
+,&quot;13600&quot;,&quot;Yes&quot;
+,&quot;13700&quot;,&quot;Yes&quot;
+,&quot;13800&quot;,&quot;Yes&quot;
+,&quot;14000&quot;,&quot;Yes&quot;
+,&quot;14007&quot;,&quot;Yes&quot;
+,&quot;14009&quot;,&quot;Yes&quot;
+,&quot;14020&quot;,&quot;Yes&quot;
+,&quot;14100&quot;,&quot;Yes&quot;
+,&quot;14101&quot;,&quot;Yes&quot;
+,&quot;14110&quot;,&quot;Yes&quot;
+,&quot;14120&quot;,&quot;Yes&quot;
+,&quot;14200&quot;,&quot;Yes&quot;
+,&quot;14300&quot;,&quot;Yes&quot;
+,&quot;14310&quot;,&quot;Yes&quot;
+,&quot;14320&quot;,&quot;Yes&quot;
+,&quot;14400&quot;,&quot;Yes&quot;,&quot;No&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>BasePlan_Putrajaya</name>
+        <dataType>String</dataType>
+        <expression>CASE({!$Record.PostalCode},&quot;62000&quot;,&quot;Yes&quot;
+,&quot;62007&quot;,&quot;Yes&quot;
+,&quot;62050&quot;,&quot;Yes&quot;
+,&quot;62100&quot;,&quot;Yes&quot;
+,&quot;62150&quot;,&quot;Yes&quot;
+,&quot;62200&quot;,&quot;Yes&quot;
+,&quot;62300&quot;,&quot;Yes&quot;
+,&quot;62502&quot;,&quot;Yes&quot;
+,&quot;62504&quot;,&quot;Yes&quot;
+,&quot;62505&quot;,&quot;Yes&quot;
+,&quot;62506&quot;,&quot;Yes&quot;
+,&quot;62510&quot;,&quot;Yes&quot;
+,&quot;62512&quot;,&quot;Yes&quot;
+,&quot;62514&quot;,&quot;Yes&quot;
+,&quot;62516&quot;,&quot;Yes&quot;
+,&quot;62517&quot;,&quot;Yes&quot;
+,&quot;62518&quot;,&quot;Yes&quot;
+,&quot;62519&quot;,&quot;Yes&quot;
+,&quot;62520&quot;,&quot;Yes&quot;
+,&quot;62522&quot;,&quot;Yes&quot;
+,&quot;62524&quot;,&quot;Yes&quot;
+,&quot;62526&quot;,&quot;Yes&quot;
+,&quot;62527&quot;,&quot;Yes&quot;
+,&quot;62530&quot;,&quot;Yes&quot;
+,&quot;62532&quot;,&quot;Yes&quot;
+,&quot;62536&quot;,&quot;Yes&quot;
+,&quot;62540&quot;,&quot;Yes&quot;
+,&quot;62542&quot;,&quot;Yes&quot;
+,&quot;62546&quot;,&quot;Yes&quot;
+,&quot;62550&quot;,&quot;Yes&quot;
+,&quot;62551&quot;,&quot;Yes&quot;
+,&quot;62570&quot;,&quot;Yes&quot;
+,&quot;62574&quot;,&quot;Yes&quot;
+,&quot;62576&quot;,&quot;Yes&quot;
+,&quot;62582&quot;,&quot;Yes&quot;
+,&quot;62584&quot;,&quot;Yes&quot;
+,&quot;62590&quot;,&quot;Yes&quot;
+,&quot;62592&quot;,&quot;Yes&quot;
+,&quot;62596&quot;,&quot;Yes&quot;
+,&quot;62602&quot;,&quot;Yes&quot;
+,&quot;62604&quot;,&quot;Yes&quot;
+,&quot;62605&quot;,&quot;Yes&quot;
+,&quot;62606&quot;,&quot;Yes&quot;
+,&quot;62616&quot;,&quot;Yes&quot;
+,&quot;62618&quot;,&quot;Yes&quot;
+,&quot;62620&quot;,&quot;Yes&quot;
+,&quot;62623&quot;,&quot;Yes&quot;
+,&quot;62624&quot;,&quot;Yes&quot;
+,&quot;62628&quot;,&quot;Yes&quot;
+,&quot;62630&quot;,&quot;Yes&quot;
+,&quot;62632&quot;,&quot;Yes&quot;
+,&quot;62648&quot;,&quot;Yes&quot;
+,&quot;62652&quot;,&quot;Yes&quot;
+,&quot;62654&quot;,&quot;Yes&quot;
+,&quot;62662&quot;,&quot;Yes&quot;
+,&quot;62668&quot;,&quot;Yes&quot;
+,&quot;62670&quot;,&quot;Yes&quot;
+,&quot;62674&quot;,&quot;Yes&quot;
+,&quot;62674&quot;,&quot;Yes&quot;
+,&quot;62675&quot;,&quot;Yes&quot;
+,&quot;62676&quot;,&quot;Yes&quot;
+,&quot;62677&quot;,&quot;Yes&quot;
+,&quot;62686&quot;,&quot;Yes&quot;
+,&quot;62692&quot;,&quot;Yes&quot;
+,&quot;62988&quot;,&quot;Yes&quot;,&quot;No&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>BasePlan_Selangor_Part1</name>
+        <dataType>String</dataType>
+        <expression>CASE({!$Record.PostalCode},&quot;40000&quot;,&quot;Yes&quot;
+,&quot;40100&quot;,&quot;Yes&quot;
+,&quot;40150&quot;,&quot;Yes&quot;
+,&quot;40160&quot;,&quot;Yes&quot;
+,&quot;40170&quot;,&quot;Yes&quot;
+,&quot;40200&quot;,&quot;Yes&quot;
+,&quot;40300&quot;,&quot;Yes&quot;
+,&quot;40350&quot;,&quot;Yes&quot;
+,&quot;40400&quot;,&quot;Yes&quot;
+,&quot;40409&quot;,&quot;Yes&quot;
+,&quot;40410&quot;,&quot;Yes&quot;
+,&quot;40440&quot;,&quot;Yes&quot;
+,&quot;40450&quot;,&quot;Yes&quot;
+,&quot;40460&quot;,&quot;Yes&quot;
+,&quot;40470&quot;,&quot;Yes&quot;
+,&quot;40490&quot;,&quot;Yes&quot;
+,&quot;40500&quot;,&quot;Yes&quot;
+,&quot;40502&quot;,&quot;Yes&quot;
+,&quot;40503&quot;,&quot;Yes&quot;
+,&quot;40505&quot;,&quot;Yes&quot;
+,&quot;40512&quot;,&quot;Yes&quot;
+,&quot;40517&quot;,&quot;Yes&quot;
+,&quot;40520&quot;,&quot;Yes&quot;
+,&quot;40529&quot;,&quot;Yes&quot;
+,&quot;40542&quot;,&quot;Yes&quot;
+,&quot;40548&quot;,&quot;Yes&quot;
+,&quot;40550&quot;,&quot;Yes&quot;
+,&quot;40551&quot;,&quot;Yes&quot;
+,&quot;40560&quot;,&quot;Yes&quot;
+,&quot;40564&quot;,&quot;Yes&quot;
+,&quot;40570&quot;,&quot;Yes&quot;
+,&quot;40572&quot;,&quot;Yes&quot;
+,&quot;40576&quot;,&quot;Yes&quot;
+,&quot;40578&quot;,&quot;Yes&quot;
+,&quot;40582&quot;,&quot;Yes&quot;
+,&quot;40590&quot;,&quot;Yes&quot;
+,&quot;40592&quot;,&quot;Yes&quot;
+,&quot;40594&quot;,&quot;Yes&quot;
+,&quot;40596&quot;,&quot;Yes&quot;
+,&quot;40598&quot;,&quot;Yes&quot;
+,&quot;40600&quot;,&quot;Yes&quot;
+,&quot;40604&quot;,&quot;Yes&quot;
+,&quot;40607&quot;,&quot;Yes&quot;
+,&quot;40608&quot;,&quot;Yes&quot;
+,&quot;40610&quot;,&quot;Yes&quot;
+,&quot;40612&quot;,&quot;Yes&quot;
+,&quot;40620&quot;,&quot;Yes&quot;
+,&quot;40622&quot;,&quot;Yes&quot;
+,&quot;40626&quot;,&quot;Yes&quot;
+,&quot;40630&quot;,&quot;Yes&quot;
+,&quot;40632&quot;,&quot;Yes&quot;
+,&quot;40646&quot;,&quot;Yes&quot;
+,&quot;40648&quot;,&quot;Yes&quot;
+,&quot;40650&quot;,&quot;Yes&quot;
+,&quot;40660&quot;,&quot;Yes&quot;
+,&quot;40664&quot;,&quot;Yes&quot;
+,&quot;40670&quot;,&quot;Yes&quot;
+,&quot;40672&quot;,&quot;Yes&quot;
+,&quot;40673&quot;,&quot;Yes&quot;
+,&quot;40674&quot;,&quot;Yes&quot;
+,&quot;40675&quot;,&quot;Yes&quot;
+,&quot;40676&quot;,&quot;Yes&quot;
+,&quot;40680&quot;,&quot;Yes&quot;
+,&quot;40690&quot;,&quot;Yes&quot;
+,&quot;40700&quot;,&quot;Yes&quot;
+,&quot;40702&quot;,&quot;Yes&quot;
+,&quot;40704&quot;,&quot;Yes&quot;
+,&quot;40706&quot;,&quot;Yes&quot;
+,&quot;40708&quot;,&quot;Yes&quot;
+,&quot;40710&quot;,&quot;Yes&quot;
+,&quot;40712&quot;,&quot;Yes&quot;
+,&quot;40714&quot;,&quot;Yes&quot;
+,&quot;40716&quot;,&quot;Yes&quot;
+,&quot;40718&quot;,&quot;Yes&quot;
+,&quot;40720&quot;,&quot;Yes&quot;
+,&quot;40722&quot;,&quot;Yes&quot;
+,&quot;40724&quot;,&quot;Yes&quot;
+,&quot;40726&quot;,&quot;Yes&quot;
+,&quot;40728&quot;,&quot;Yes&quot;
+,&quot;40730&quot;,&quot;Yes&quot;
+,&quot;40732&quot;,&quot;Yes&quot;
+,&quot;40800&quot;,&quot;Yes&quot;
+,&quot;40802&quot;,&quot;Yes&quot;
+,&quot;40804&quot;,&quot;Yes&quot;
+,&quot;40806&quot;,&quot;Yes&quot;
+,&quot;40808&quot;,&quot;Yes&quot;
+,&quot;40810&quot;,&quot;Yes&quot;
+,&quot;40900&quot;,&quot;Yes&quot;
+,&quot;40912&quot;,&quot;Yes&quot;
+,&quot;40915&quot;,&quot;Yes&quot;
+,&quot;40990&quot;,&quot;Yes&quot;
+,&quot;41000&quot;,&quot;Yes&quot;
+,&quot;41050&quot;,&quot;Yes&quot;
+,&quot;41100&quot;,&quot;Yes&quot;
+,&quot;41150&quot;,&quot;Yes&quot;
+,&quot;41200&quot;,&quot;Yes&quot;
+,&quot;41250&quot;,&quot;Yes&quot;
+,&quot;41300&quot;,&quot;Yes&quot;
+,&quot;41400&quot;,&quot;Yes&quot;
+,&quot;41506&quot;,&quot;Yes&quot;
+,&quot;41560&quot;,&quot;Yes&quot;
+,&quot;41586&quot;,&quot;Yes&quot;
+,&quot;41672&quot;,&quot;Yes&quot;
+,&quot;41700&quot;,&quot;Yes&quot;
+,&quot;41710&quot;,&quot;Yes&quot;
+,&quot;41720&quot;,&quot;Yes&quot;
+,&quot;41900&quot;,&quot;Yes&quot;
+,&quot;41902&quot;,&quot;Yes&quot;
+,&quot;41904&quot;,&quot;Yes&quot;
+,&quot;41906&quot;,&quot;Yes&quot;
+,&quot;41908&quot;,&quot;Yes&quot;
+,&quot;41910&quot;,&quot;Yes&quot;
+,&quot;41912&quot;,&quot;Yes&quot;
+,&quot;41914&quot;,&quot;Yes&quot;
+,&quot;41916&quot;,&quot;Yes&quot;
+,&quot;41918&quot;,&quot;Yes&quot;
+,&quot;41990&quot;,&quot;Yes&quot;
+,&quot;42000&quot;,&quot;Yes&quot;
+,&quot;42009&quot;,&quot;Yes&quot;
+,&quot;42100&quot;,&quot;Yes&quot;
+,&quot;42200&quot;,&quot;Yes&quot;
+,&quot;42300&quot;,&quot;Yes&quot;
+,&quot;42425&quot;,&quot;Yes&quot;
+,&quot;42500&quot;,&quot;Yes&quot;
+,&quot;42507&quot;,&quot;Yes&quot;
+,&quot;42509&quot;,&quot;Yes&quot;
+,&quot;42600&quot;,&quot;Yes&quot;
+,&quot;42610&quot;,&quot;Yes&quot;
+,&quot;42700&quot;,&quot;Yes&quot;
+,&quot;42920&quot;,&quot;Yes&quot;
+,&quot;42920&quot;,&quot;Yes&quot;
+,&quot;43000&quot;,&quot;Yes&quot;
+,&quot;43007&quot;,&quot;Yes&quot;
+,&quot;43009&quot;,&quot;Yes&quot;
+,&quot;43200&quot;,&quot;Yes&quot;
+,&quot;43207&quot;,&quot;Yes&quot;
+,&quot;43300&quot;,&quot;Yes&quot;
+,&quot;43399&quot;,&quot;Yes&quot;
+,&quot;43400&quot;,&quot;Yes&quot;
+,&quot;43500&quot;,&quot;Yes&quot;
+,&quot;43558&quot;,&quot;Yes&quot;
+,&quot;43600&quot;,&quot;Yes&quot;
+,&quot;43650&quot;,&quot;Yes&quot;
+,&quot;43700&quot;,&quot;Yes&quot;
+,&quot;43800&quot;,&quot;Yes&quot;
+,&quot;43807&quot;,&quot;Yes&quot;
+,&quot;43900&quot;,&quot;Yes&quot;,&quot;No&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>BasePlan_Selangor_Part2</name>
+        <dataType>String</dataType>
+        <expression>CASE({!$Record.PostalCode},&quot;45600&quot;,&quot;Yes&quot;
+,&quot;45800&quot;,&quot;Yes&quot;
+,&quot;46000&quot;,&quot;Yes&quot;
+,&quot;46050&quot;,&quot;Yes&quot;
+,&quot;46100&quot;,&quot;Yes&quot;
+,&quot;46150&quot;,&quot;Yes&quot;
+,&quot;46200&quot;,&quot;Yes&quot;
+,&quot;46300&quot;,&quot;Yes&quot;
+,&quot;46350&quot;,&quot;Yes&quot;
+,&quot;46400&quot;,&quot;Yes&quot;
+,&quot;46500&quot;,&quot;Yes&quot;
+,&quot;46505&quot;,&quot;Yes&quot;
+,&quot;46506&quot;,&quot;Yes&quot;
+,&quot;46510&quot;,&quot;Yes&quot;
+,&quot;46547&quot;,&quot;Yes&quot;
+,&quot;46549&quot;,&quot;Yes&quot;
+,&quot;46551&quot;,&quot;Yes&quot;
+,&quot;46564&quot;,&quot;Yes&quot;
+,&quot;46582&quot;,&quot;Yes&quot;
+,&quot;46598&quot;,&quot;Yes&quot;
+,&quot;46662&quot;,&quot;Yes&quot;
+,&quot;46667&quot;,&quot;Yes&quot;
+,&quot;46668&quot;,&quot;Yes&quot;
+,&quot;46672&quot;,&quot;Yes&quot;
+,&quot;46675&quot;,&quot;Yes&quot;
+,&quot;46700&quot;,&quot;Yes&quot;
+,&quot;46710&quot;,&quot;Yes&quot;
+,&quot;46720&quot;,&quot;Yes&quot;
+,&quot;46730&quot;,&quot;Yes&quot;
+,&quot;46740&quot;,&quot;Yes&quot;
+,&quot;46750&quot;,&quot;Yes&quot;
+,&quot;46760&quot;,&quot;Yes&quot;
+,&quot;46770&quot;,&quot;Yes&quot;
+,&quot;46780&quot;,&quot;Yes&quot;
+,&quot;46781&quot;,&quot;Yes&quot;
+,&quot;46782&quot;,&quot;Yes&quot;
+,&quot;46783&quot;,&quot;Yes&quot;
+,&quot;46784&quot;,&quot;Yes&quot;
+,&quot;46785&quot;,&quot;Yes&quot;
+,&quot;46786&quot;,&quot;Yes&quot;
+,&quot;46787&quot;,&quot;Yes&quot;
+,&quot;46788&quot;,&quot;Yes&quot;
+,&quot;46789&quot;,&quot;Yes&quot;
+,&quot;46790&quot;,&quot;Yes&quot;
+,&quot;46791&quot;,&quot;Yes&quot;
+,&quot;46792&quot;,&quot;Yes&quot;
+,&quot;46793&quot;,&quot;Yes&quot;
+,&quot;46794&quot;,&quot;Yes&quot;
+,&quot;46795&quot;,&quot;Yes&quot;
+,&quot;46796&quot;,&quot;Yes&quot;
+,&quot;46797&quot;,&quot;Yes&quot;
+,&quot;46798&quot;,&quot;Yes&quot;
+,&quot;46799&quot;,&quot;Yes&quot;
+,&quot;46800&quot;,&quot;Yes&quot;
+,&quot;46801&quot;,&quot;Yes&quot;
+,&quot;46802&quot;,&quot;Yes&quot;
+,&quot;46803&quot;,&quot;Yes&quot;
+,&quot;46804&quot;,&quot;Yes&quot;
+,&quot;46805&quot;,&quot;Yes&quot;
+,&quot;46806&quot;,&quot;Yes&quot;
+,&quot;46860&quot;,&quot;Yes&quot;
+,&quot;46870&quot;,&quot;Yes&quot;
+,&quot;46960&quot;,&quot;Yes&quot;
+,&quot;46962&quot;,&quot;Yes&quot;
+,&quot;46964&quot;,&quot;Yes&quot;
+,&quot;46966&quot;,&quot;Yes&quot;
+,&quot;46968&quot;,&quot;Yes&quot;
+,&quot;46970&quot;,&quot;Yes&quot;
+,&quot;46972&quot;,&quot;Yes&quot;
+,&quot;46974&quot;,&quot;Yes&quot;
+,&quot;46976&quot;,&quot;Yes&quot;
+,&quot;46978&quot;,&quot;Yes&quot;
+,&quot;47000&quot;,&quot;Yes&quot;
+,&quot;47020&quot;,&quot;Yes&quot;
+,&quot;47031&quot;,&quot;Yes&quot;
+,&quot;47100&quot;,&quot;Yes&quot;
+,&quot;47110&quot;,&quot;Yes&quot;
+,&quot;47120&quot;,&quot;Yes&quot;
+,&quot;47130&quot;,&quot;Yes&quot;
+,&quot;47140&quot;,&quot;Yes&quot;
+,&quot;47150&quot;,&quot;Yes&quot;
+,&quot;47160&quot;,&quot;Yes&quot;
+,&quot;47170&quot;,&quot;Yes&quot;
+,&quot;47180&quot;,&quot;Yes&quot;
+,&quot;47190&quot;,&quot;Yes&quot;
+,&quot;47200&quot;,&quot;Yes&quot;
+,&quot;47210&quot;,&quot;Yes&quot;
+,&quot;47300&quot;,&quot;Yes&quot;
+,&quot;47301&quot;,&quot;Yes&quot;
+,&quot;47304&quot;,&quot;Yes&quot;
+,&quot;47307&quot;,&quot;Yes&quot;
+,&quot;47308&quot;,&quot;Yes&quot;
+,&quot;47309&quot;,&quot;Yes&quot;
+,&quot;47310&quot;,&quot;Yes&quot;
+,&quot;47400&quot;,&quot;Yes&quot;
+,&quot;47410&quot;,&quot;Yes&quot;
+,&quot;47430&quot;,&quot;Yes&quot;
+,&quot;47500&quot;,&quot;Yes&quot;
+,&quot;47507&quot;,&quot;Yes&quot;
+,&quot;47510&quot;,&quot;Yes&quot;
+,&quot;47600&quot;,&quot;Yes&quot;
+,&quot;47601&quot;,&quot;Yes&quot;
+,&quot;47610&quot;,&quot;Yes&quot;
+,&quot;47618&quot;,&quot;Yes&quot;
+,&quot;47620&quot;,&quot;Yes&quot;
+,&quot;47630&quot;,&quot;Yes&quot;
+,&quot;47640&quot;,&quot;Yes&quot;
+,&quot;47650&quot;,&quot;Yes&quot;
+,&quot;47800&quot;,&quot;Yes&quot;
+,&quot;47801&quot;,&quot;Yes&quot;
+,&quot;47810&quot;,&quot;Yes&quot;
+,&quot;47820&quot;,&quot;Yes&quot;
+,&quot;47829&quot;,&quot;Yes&quot;
+,&quot;47830&quot;,&quot;Yes&quot;
+,&quot;47850&quot;,&quot;Yes&quot;
+,&quot;48000&quot;,&quot;Yes&quot;
+,&quot;48020&quot;,&quot;Yes&quot;
+,&quot;48050&quot;,&quot;Yes&quot;
+,&quot;48100&quot;,&quot;Yes&quot;
+,&quot;48100&quot;,&quot;Yes&quot;
+,&quot;53100&quot;,&quot;Yes&quot;
+,&quot;55100&quot;,&quot;Yes&quot;
+,&quot;56000&quot;,&quot;Yes&quot;
+,&quot;56100&quot;,&quot;Yes&quot;
+,&quot;62250&quot;,&quot;Yes&quot;
+,&quot;63000&quot;,&quot;Yes&quot;
+,&quot;63100&quot;,&quot;Yes&quot;
+,&quot;63200&quot;,&quot;Yes&quot;
+,&quot;63300&quot;,&quot;Yes&quot;
+,&quot;64000&quot;,&quot;Yes&quot;
+,&quot;68000&quot;,&quot;Yes&quot;
+,&quot;68100&quot;,&quot;Yes&quot;,&quot;No&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>IsNew</name>
+        <dataType>Boolean</dataType>
+        <expression>ISNEW()</expression>
+    </formulas>
+    <formulas>
+        <name>LeadCurrency</name>
+        <dataType>String</dataType>
+        <expression>CASE({!$Record.CountryCode}, &quot;MY&quot;, &quot;MYR&quot;, &quot;TH&quot;, &quot;THB&quot;,&quot;PH&quot;,&quot;PHP&quot;, &quot;USD&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>NowTimestamp</name>
+        <dataType>DateTime</dataType>
+        <expression>NOW()</expression>
+    </formulas>
+    <formulas>
+        <name>Today</name>
+        <dataType>Date</dataType>
+        <expression>TODAY()</expression>
+    </formulas>
+    <interviewLabel>Lead (Inbound) 2.0 {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Lead (Inbound) 2.0</label>
+    <loops>
+        <name>Task_Loop</name>
+        <label>Task Loop</label>
+        <locationX>2261</locationX>
+        <locationY>2147</locationY>
+        <collectionReference>Get_Open_Tasks</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Check_Task_Owner</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Update_All_Task_in_Collection</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Copy_1_of_Push_to_EventBridge</name>
+        <label>Push to EventBridge</label>
+        <locationX>50</locationX>
+        <locationY>3971</locationY>
+        <connector>
+            <targetReference>Update_Unqualified_Status_Timestamp</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>lead_id__c</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>lead_event__e</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Push_to_EventBridge</name>
+        <label>Push to EventBridge</label>
+        <locationX>2338</locationX>
+        <locationY>3863</locationY>
+        <connector>
+            <targetReference>Update_Contacted_Status_Timestamp</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>lead_id__c</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>lead_event__e</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordLookups>
+        <name>Get_AM_User</name>
+        <label>Get AM User</label>
+        <locationX>2459</locationX>
+        <locationY>1439</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_AM_User</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Email</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.AM_Email__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>User</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_BC_User</name>
+        <label>Get BC User</label>
+        <locationX>2019</locationX>
+        <locationY>1439</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_BC_User</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Email</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.BC_Email__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>User</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Open_Tasks</name>
+        <label>Get Open Tasks</label>
+        <locationX>2261</locationX>
+        <locationY>2039</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Task_Loop</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>WhoId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Status</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Open</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_AC_Status_Timestamp_0</name>
+        <label>Update AC Status Timestamp</label>
+        <locationX>2338</locationX>
+        <locationY>4187</locationY>
+        <connector>
+            <targetReference>Update_Status_New_Timestamp</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Status_Attempted_Contact_Timestamp__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>FlowBypassDateTime__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status_Attempted_Contact_Timestamp__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_AC_Status_Timestamp_0_0</name>
+        <label>Update AC Status Timestamp</label>
+        <locationX>1282</locationX>
+        <locationY>4187</locationY>
+        <connector>
+            <targetReference>Update_First_WA_Response_Timestamp</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Status_Attempted_Contact_Timestamp__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>FlowBypassDateTime__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status_Attempted_Contact_Timestamp__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_All_Task_in_Collection</name>
+        <label>Update All Task in Collection</label>
+        <locationX>2261</locationX>
+        <locationY>2747</locationY>
+        <connector>
+            <targetReference>Base_Plan_Availability</targetReference>
+        </connector>
+        <inputReference>var_Task_Collection</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Contacted_Status_Timestamp</name>
+        <label>Update Contacted Status Timestamp</label>
+        <locationX>2338</locationX>
+        <locationY>3971</locationY>
+        <connector>
+            <targetReference>Update_Status_WA_Callback_Timestamp_0</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Status_Contacted_Timestamp__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>FlowBypassDateTime__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status_Contacted_Timestamp__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Timestamp for leads that received Day 1 Instant Message (IM) via any Messaging Platforms &amp; Tools</description>
+        <name>Update_D1_IM_Timestamp_0</name>
+        <label>Update D1 IM Timestamp</label>
+        <locationX>1942</locationX>
+        <locationY>3755</locationY>
+        <connector>
+            <targetReference>Update_D3_IM_Timestamp_0</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>D1_IM_Timestamp__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>IM_Instant_Messaging_Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Sent 1st Follow Up Message - Day 1</stringValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>D1_IM_Timestamp__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Timestamp for leads that received Day 1 Instant Message (IM) via any Messaging Platforms &amp; Tools</description>
+        <name>Update_D1_IM_Timestamp_in_AC</name>
+        <label>Update D1 IM Timestamp in AC</label>
+        <locationX>1414</locationX>
+        <locationY>3755</locationY>
+        <connector>
+            <targetReference>Update_D3_IM_Timestamp_in_AC</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>D1_IM_Timestamp__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>IM_Instant_Messaging_Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Sent 1st Follow Up Message - Day 1</stringValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>D1_IM_Timestamp__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Timestamp for leads that received Day 3 Instant Message (IM) via any Messaging Platforms &amp; Tools</description>
+        <name>Update_D3_IM_Timestamp_0</name>
+        <label>Update D3 IM Timestamp</label>
+        <locationX>1942</locationX>
+        <locationY>3863</locationY>
+        <connector>
+            <targetReference>Update_D5_IM_Timestamp_0</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>D3_IM_Timestamp__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>IM_Instant_Messaging_Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Sent 2nd Follow Up Message - Day 3</stringValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>D3_IM_Timestamp__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Timestamp for leads that received Day 3 Instant Message (IM) via any Messaging Platforms &amp; Tools</description>
+        <name>Update_D3_IM_Timestamp_in_AC</name>
+        <label>Update D3 IM Timestamp in AC</label>
+        <locationX>1414</locationX>
+        <locationY>3863</locationY>
+        <connector>
+            <targetReference>Update_D5_IM_Timestamp_in_AC</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>D3_IM_Timestamp__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>IM_Instant_Messaging_Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Sent 2nd Follow Up Message - Day 3</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>D3_IM_Timestamp__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Timestamp for leads that received Day 5 Instant Message (IM) via any Messaging Platforms &amp; Tools</description>
+        <name>Update_D5_IM_Timestamp_0</name>
+        <label>Update D5 IM Timestamp</label>
+        <locationX>1942</locationX>
+        <locationY>3971</locationY>
+        <connector>
+            <targetReference>WA_Callback_Status_Field_Updates</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>D5_IM_Timestamp__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>IM_Instant_Messaging_Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Sent 3rd Follow Up Message - Day 5</stringValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>D5_IM_Timestamp__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Timestamp for leads that received Day 5 Instant Message (IM) via any Messaging Platforms &amp; Tools</description>
+        <name>Update_D5_IM_Timestamp_in_AC</name>
+        <label>Update D5 IM Timestamp in AC</label>
+        <locationX>1414</locationX>
+        <locationY>3971</locationY>
+        <connector>
+            <targetReference>X2nd_Call_Task_Trigger_0</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>D5_IM_Timestamp__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>IM_Instant_Messaging_Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Sent 3rd Follow Up Message - Day 5</stringValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>D5_IM_Timestamp__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_First_WA_Response_Timestamp</name>
+        <label>Update First WA Response Timestamp</label>
+        <locationX>1282</locationX>
+        <locationY>4295</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>First_WA_Response__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>First_WA_Response_Timestamp__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>First_WA_Response_Timestamp__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>FlowBypassDateTime__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Lead_Variables_to_Lead_Record</name>
+        <label>Update Lead Variables to Lead Record</label>
+        <locationX>2393</locationX>
+        <locationY>3539</locationY>
+        <connector>
+            <targetReference>Inbound_Status</targetReference>
+        </connector>
+        <inputReference>var_Lead</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_MS_Status_Timestamp</name>
+        <label>Update MS Status Timestamp</label>
+        <locationX>3394</locationX>
+        <locationY>3863</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Status_Meeting_Scheduled_Timestamp__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>FlowBypassDateTime__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status_Meeting_Scheduled_Timestamp__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_MS_Status_Timestamp_0_0</name>
+        <label>Update MS Status Timestamp</label>
+        <locationX>3922</locationX>
+        <locationY>3863</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Status_Meeting_Scheduled_Timestamp__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>FlowBypassDateTime__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status_Meeting_Scheduled_Timestamp__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Nurturing_Status_Timestamp</name>
+        <label>Update Nurturing Status Timestamp</label>
+        <locationX>2866</locationX>
+        <locationY>3863</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Status_Nurturing_Timestamp__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Status_Nurturing_Timestamp__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Status_New_Timestamp</name>
+        <label>Update Status New Timestamp</label>
+        <locationX>2338</locationX>
+        <locationY>4295</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Status_New_Timestamp__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>FlowBypassDateTime__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status_New_Timestamp__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Status_New_Timestamp_0</name>
+        <label>Update Status New Timestamp</label>
+        <locationX>754</locationX>
+        <locationY>3863</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Status_New_Timestamp__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>FlowBypassDateTime__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status_New_Timestamp__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Status_WA_Callback_Timestamp_0</name>
+        <label>Update Status WA Callback Timestamp</label>
+        <locationX>2338</locationX>
+        <locationY>4079</locationY>
+        <connector>
+            <targetReference>Update_AC_Status_Timestamp_0</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Status_WA_Callback_Timestamp__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>FlowBypassDateTime__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status_WA_Callback_Timestamp__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Status_WA_Callback_Timestamp_0_0</name>
+        <label>Update Status WA Callback Timestamp</label>
+        <locationX>1810</locationX>
+        <locationY>4187</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Status_WA_Callback_Timestamp__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>FlowBypassDateTime__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status_WA_Callback_Timestamp__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Unqualified_Status_Timestamp</name>
+        <label>Update Unqualified Status Timestamp</label>
+        <locationX>182</locationX>
+        <locationY>4163</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Status_Unqualified_Timestamp__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>FlowBypassDateTime__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status_Unqualified_Timestamp__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <start>
+        <locationX>2267</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Assign_Lead_Variables</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>Contains</operator>
+            <value>
+                <stringValue>0122w000000HuYC</stringValue>
+            </value>
+        </filters>
+        <object>Lead</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <subflows>
+        <name>Update_Lead_Industry_Field</name>
+        <label>Update Lead Industry Field</label>
+        <locationX>2261</locationX>
+        <locationY>3347</locationY>
+        <connector>
+            <targetReference>Update_Lead_Variables_to_Lead_Record</targetReference>
+        </connector>
+        <flowName>Lead_Update_Industry</flowName>
+        <inputAssignments>
+            <name>varIndustry</name>
+            <value>
+                <elementReference>$Record.Business_Type_Industry_Hidden__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>varLeadId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <triggerOrder>590</triggerOrder>
+    <variables>
+        <name>NewLeadsTask</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Task</objectType>
+    </variables>
+    <variables>
+        <name>var_Lead</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Lead</objectType>
+    </variables>
+    <variables>
+        <name>var_Task</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Task</objectType>
+    </variables>
+    <variables>
+        <name>var_Task_Collection</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Task</objectType>
+    </variables>
+</Flow>
