@@ -117,6 +117,10 @@ python3 src/main.py query "What Apex classes handle integration?"
 
 ### **Environment Configuration**
 ```bash
+# Clone the repository
+git clone https://github.com/zhijunstorehub/salesforce-ai-colleague.git
+cd salesforce-ai-colleague
+
 # Copy template and configure
 cp .env_template .env
 

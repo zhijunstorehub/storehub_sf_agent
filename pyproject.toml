@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "rag-poc"
+name = "salesforce-ai-colleague"
 version = "0.1.0"
-description = "Salesforce Flow RAG Ingestion POC - Week 1 of AI-First Vision 3.0"
+description = "AI-powered Salesforce metadata intelligence platform with semantic analysis and dependency mapping"
 authors = ["Zhi Jun <zj@storehub.com>"]
 readme = "README.md"
 packages = [{include = "rag_poc"}]

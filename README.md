@@ -76,8 +76,8 @@ python3 src/main.py dependencies --component "YourFlowName" --depth 3
 
 ### **1. Installation**
 ```bash
-git clone <repository>
-cd rag-poc
+git clone https://github.com/zhijunstorehub/salesforce-ai-colleague.git
+cd salesforce-ai-colleague
 pip install -r requirements.txt
 ```
 
@@ -140,7 +140,7 @@ python3 src/main.py analyze --type Flow --limit 2
 
 ### **Project Structure**
 ```
-rag-poc/
+salesforce-ai-colleague/
 ├── src/
 │   ├── config.py              # Comprehensive configuration system
 │   ├── main.py                # Enhanced CLI with 5 commands  
