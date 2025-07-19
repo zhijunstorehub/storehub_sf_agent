@@ -67,7 +67,7 @@ export default function Home() {
                 <div className="w-3 h-3 bg-purple-500 rounded"></div>
                 <h3 className="text-lg font-bold text-white">Future Vision</h3>
               </div>
-              <p className="text-sm text-slate-300">Storehub Intelligence Orchestration</p>
+              <p className="text-sm text-slate-300">Enterprise Intelligence Platform</p>
               <ul className="text-xs text-slate-400 mt-2 space-y-1">
                 <li>🎯 AI Agent Layer</li>
                 <li>📊 Semantic Layer</li>

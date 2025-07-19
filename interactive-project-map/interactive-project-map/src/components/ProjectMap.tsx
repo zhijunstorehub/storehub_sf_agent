@@ -121,11 +121,11 @@ const initialNodes: Node[] = [
 
   // === FUTURE VISION LAYER (Far right, well spaced) ===
   {
-    id: 'storehub-orchestration',
+    id: 'enterprise-orchestration',
     type: 'vision',
     position: { x: 1550, y: 150 },
     data: {
-      title: 'Storehub Intelligence Orchestration',
+      title: 'Enterprise Intelligence Orchestration',
       status: 'planned',
       description: 'Complete AI-driven business intelligence platform',
       layers: [
@@ -203,7 +203,7 @@ const initialEdges: Edge[] = [
   {
     id: 'v1-to-orchestration',
     source: 'ai-colleague-v1',
-    target: 'storehub-orchestration',
+    target: 'enterprise-orchestration',
     type: 'smoothstep',
     animated: true,
     label: 'Evolves Into',
@@ -223,7 +223,7 @@ const initialEdges: Edge[] = [
   {
     id: 'agents-to-orchestration',
     source: 'ai-agents',
-    target: 'storehub-orchestration',
+    target: 'enterprise-orchestration',
     type: 'smoothstep',
     label: 'Part Of',
     style: { stroke: '#ef4444', strokeWidth: 2, strokeDasharray: '5,3' }
