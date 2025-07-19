@@ -8,13 +8,14 @@ This repository documents the complete evolution of the AI Colleague project fro
 
 | Branch | Purpose | Status | Description |
 |--------|---------|---------|-------------|
-| `main` | **Current Working System** | ✅ Active | Clean, production-ready AI Colleague V1.0 |
+| `main` | **Current Working System** | ✅ Active | Clean, production-ready AI Colleague V1.0 + Interactive Map |
+| `v2-phase2-advanced-graph` | **Phase 2 Development** | 🚀 Active | Advanced knowledge graph and comprehensive metadata expansion |
 | `v1-release` | **Version 1.0 Release** | 🏷️ Tagged | Official V1.0 release with full features |
 | `poc-archive` | **Complete POC History** | 📚 Archive | Preserves entire development journey and experimentation |
 
 ### 🎯 **What Each Branch Contains**
 
-#### `main` / `v1-release` - **Production System**
+#### `main` - **Production System V1.0**
 ```
 ✅ Clean, working AI Colleague system
 ✅ LLM-powered semantic analysis 
@@ -22,7 +23,27 @@ This repository documents the complete evolution of the AI Colleague project fro
 ✅ GraphRAG query interface with natural language
 ✅ Beautiful CLI with Rich formatting
 ✅ Comprehensive documentation
+✅ Interactive Project Map visualization
 ✅ Sample Salesforce flows for testing
+```
+
+#### `v2-phase2-advanced-graph` - **Phase 2 Advanced Development**
+```
+🚀 Comprehensive Salesforce metadata support
+🚀 Apex Classes, Validation Rules, Process Builders
+🚀 Advanced dependency analysis and visualization
+🚀 Multi-org support and comparison
+🚀 Enhanced GraphRAG capabilities
+🚀 Interactive dependency mapping
+🚀 Metadata impact assessment tools
+🚀 Advanced semantic understanding
+```
+
+#### `v1-release` - **Tagged Release**
+```
+🏷️ Official V1.0 release with full features
+🏷️ Stable baseline for future development
+🏷️ Reference implementation
 ```
 
 #### `poc-archive` - **Complete Development History**

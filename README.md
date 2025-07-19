@@ -33,14 +33,18 @@ The AI Colleague is built on a state-of-the-art **GraphRAG** architecture, combi
 - Automated flow and dependency node creation
 - Relationship mapping between flows and dependencies
 
-🔄 **Current Focus**: Expanding the knowledge graph and building query capabilities
+🚀 **Phase 2: Advanced Knowledge Graph & Comprehensive Metadata** - INITIATED (V2 Branch)
+- Expanding beyond Flows to comprehensive Salesforce metadata
+- Advanced GraphRAG query capabilities
+- Multi-org support and dependency visualization
+- Enhanced semantic understanding across all platform components
 
 ## Project Roadmap
 
 The development is structured into four key phases, building upon each other to create a comprehensive platform.
 
 *   **✅ Phase 1: Multi-Layer Semantic Extraction**: Building the core ingestion and analysis pipeline to parse Salesforce metadata and create rich, semantic objects. (Focus: Salesforce Flows)
-*   **🔄 Phase 2: Dependency Analysis & Knowledge Graph**: Constructing the knowledge graph to map and visualize the intricate dependencies and logical relationships across the entire org.
+*   **🚀 Phase 2: Advanced Knowledge Graph & Comprehensive Metadata**: Expanding to include Apex Classes, Validation Rules, Process Builders, Workflow Rules, Custom Objects, and advanced dependency analysis with interactive visualization.
 *   **⏳ Phase 3: Context-Aware Debugging**: Leveraging the knowledge graph to perform intelligent root cause analysis, moving from "what failed?" to "why did it fail?".
 *   **⏳ Phase 4: Pattern-Based Builder**: Utilizing the library of understood patterns to assist in the generation of new, robust, and best-practice-compliant automations.
 
