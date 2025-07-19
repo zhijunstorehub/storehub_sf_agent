@@ -25,10 +25,29 @@ pandas>=2.0.0
 matplotlib>=3.7.0
 seaborn>=0.12.0
 
+# Phase 2 - Enhanced Dependencies
+asyncio-mqtt>=0.13.0  # For async processing
+aiohttp>=3.8.0  # For async HTTP requests
+networkx>=3.0  # For dependency graph analysis
+plotly>=5.17.0  # For interactive visualizations
+dash>=2.14.0  # For web-based dashboards
+beautifulsoup4>=4.12.0  # For XML/HTML parsing
+lxml>=4.9.0  # For advanced XML processing
+
+# Development and testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-cov>=4.1.0
+black>=23.0.0
+isort>=5.12.0
+flake8>=6.0.0
+
 # System requirements (install manually):
 # Salesforce CLI (sf) - latest version (currently 2.96.4+)
 # Installation: npm install --global @salesforce/cli
 # Required for comprehensive metadata extraction including:
 # - Flows, Apex Classes, Triggers, Validation Rules
 # - Process Builders, Workflow Rules, Custom Objects
-# - Complete source code and XML metadata retrieval 
+# - Complete source code and XML metadata retrieval
+# - Dependency analysis via Tooling API
+# - Multi-org support and deployment capabilities 
