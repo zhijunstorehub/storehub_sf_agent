@@ -1,54 +1,78 @@
-# Core dependencies
-pydantic>=2.0.0
-pydantic-settings>=2.0.0
-python-dotenv>=1.0.0
-streamlit>=1.28.0
-requests>=2.31.0
-rich>=13.0.0
-click>=8.1.0
+# Python 3.11+ Requirements for Salesforce AI Colleague
+# Enforces modern Python 3 compatibility and best practices
 
-# LLM and AI dependencies
-langchain>=0.1.0
-langchain-text-splitters>=0.0.1
-google-generativeai>=0.3.0
+# Core dependencies - Modern Python 3 versions
+pydantic>=2.5.0,<3.0.0
+pydantic-settings>=2.1.0,<3.0.0
+python-dotenv>=1.0.0,<2.0.0
+streamlit>=1.29.0,<2.0.0
+requests>=2.31.0,<3.0.0
+rich>=13.7.0,<14.0.0
+click>=8.1.7,<9.0.0
 
-# Vector database and storage
-chromadb>=0.4.0
-numpy>=1.24.0
+# LLM and AI dependencies - Latest stable versions
+langchain>=0.1.0,<0.3.0
+langchain-text-splitters>=0.0.1,<0.1.0
 
-# Utilities
-tenacity>=8.2.0
-xmltodict>=0.13.0
-simple-salesforce>=1.12.0
+# LLM Providers - All optional, install as needed
+google-generativeai>=0.3.2,<0.5.0  # Google Gemini (Primary)
+openai>=1.6.0,<2.0.0               # OpenAI GPT models (Secondary)
+anthropic>=0.8.1,<0.9.0            # Anthropic Claude (Tertiary)
 
-# Data analysis and visualization
-pandas>=2.0.0
-matplotlib>=3.7.0
-seaborn>=0.12.0
+# Vector database and storage - Modern versions
+chromadb>=0.4.22,<0.5.0
+numpy>=1.24.0,<2.0.0
 
-# Phase 2 - Enhanced Dependencies
-asyncio-mqtt>=0.13.0  # For async processing
-aiohttp>=3.8.0  # For async HTTP requests
-networkx>=3.0  # For dependency graph analysis
-plotly>=5.17.0  # For interactive visualizations
-dash>=2.14.0  # For web-based dashboards
-beautifulsoup4>=4.12.0  # For XML/HTML parsing
-lxml>=4.9.0  # For advanced XML processing
+# Utilities - Python 3 optimized
+tenacity>=8.2.0,<9.0.0
+xmltodict>=0.13.0,<0.14.0
+simple-salesforce>=1.12.6,<2.0.0
 
-# Development and testing
-pytest>=7.4.0
-pytest-asyncio>=0.21.0
-pytest-cov>=4.1.0
-black>=23.0.0
-isort>=5.12.0
-flake8>=6.0.0
+# Data analysis and visualization - Modern stack
+pandas>=2.1.0,<3.0.0
+matplotlib>=3.8.0,<4.0.0
+seaborn>=0.13.0,<0.14.0
+
+# Phase 2 - Enhanced Dependencies with version constraints
+aiohttp>=3.9.0,<4.0.0           # Async HTTP for Python 3.11+
+networkx>=3.2.0,<4.0.0          # Graph analysis
+plotly>=5.17.0,<6.0.0           # Interactive visualizations
+dash>=2.15.0,<3.0.0             # Web dashboards
+beautifulsoup4>=4.12.2,<5.0.0   # HTML/XML parsing
+lxml>=4.9.3,<5.0.0              # XML processing
+
+# Development and testing - Modern Python 3 tooling
+pytest>=7.4.3,<8.0.0
+pytest-asyncio>=0.21.1,<0.22.0
+pytest-cov>=4.1.0,<5.0.0
+black>=23.12.0,<24.0.0
+isort>=5.13.0,<6.0.0
+flake8>=6.1.0,<7.0.0
+mypy>=1.8.0,<2.0.0
+
+# Type checking and modern Python support
+typing-extensions>=4.8.0,<5.0.0  # Enhanced typing for Python 3.11+
+
+# Neo4j driver - Latest stable
+neo4j>=5.15.0,<6.0.0
 
 # System requirements (install manually):
-# Salesforce CLI (sf) - latest version (currently 2.96.4+)
-# Installation: npm install --global @salesforce/cli
-# Required for comprehensive metadata extraction including:
-# - Flows, Apex Classes, Triggers, Validation Rules
-# - Process Builders, Workflow Rules, Custom Objects
-# - Complete source code and XML metadata retrieval
-# - Dependency analysis via Tooling API
-# - Multi-org support and deployment capabilities 
+# ==========================================
+# Python 3.11+ (Required)
+#   - Modern async/await support
+#   - Enhanced type annotations
+#   - Performance improvements
+#   - Security updates
+#
+# Salesforce CLI (sf) - Latest version (currently 2.96.4+)
+#   Installation: npm install --global @salesforce/cli@latest
+#   Required for comprehensive metadata extraction including:
+#   - Flows, Apex Classes, Triggers, Validation Rules
+#   - Process Builders, Workflow Rules, Custom Objects
+#   - Complete source code and XML metadata retrieval
+#   - Dependency analysis via Tooling API
+#   - Multi-org support and deployment capabilities
+#
+# Node.js 18+ LTS (for Salesforce CLI)
+#   Installation: https://nodejs.org/
+#   Required for: @salesforce/cli package manager 

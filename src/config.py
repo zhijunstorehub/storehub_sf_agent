@@ -1,5 +1,7 @@
 """Configuration management for the AI Colleague system."""
 
+from __future__ import annotations
+
 import os
 from typing import Optional, List, Dict
 from pydantic import BaseModel, Field
@@ -10,15 +12,21 @@ class MetadataType(str, Enum):
     """Supported Salesforce metadata types for Phase 2 expansion."""
     # Phase 1 - Completed
     FLOW = "Flow"
+    FLOWS = "Flow"  # Alias for flows processing
     
     # Phase 2 - New Additions
     APEX_CLASS = "ApexClass"
+    APEX_CLASSES = "ApexClass"  # Alias for apex classes processing
     APEX_TRIGGER = "ApexTrigger"
+    APEX_TRIGGERS = "ApexTrigger"  # Alias for apex triggers processing
     VALIDATION_RULE = "ValidationRule"
+    VALIDATION_RULES = "ValidationRule"  # Alias for validation rules processing
     WORKFLOW_RULE = "WorkflowRule"
     PROCESS_BUILDER = "Process"  # Note: Processes in Metadata API
     CUSTOM_OBJECT = "CustomObject"
+    CUSTOM_OBJECTS = "CustomObject"  # Alias for custom objects processing
     CUSTOM_FIELD = "CustomField"
+    CUSTOM_FIELDS = "CustomField"  # Alias for custom fields processing
     PERMISSION_SET = "PermissionSet"
     PROFILE = "Profile"
     PAGE_LAYOUT = "Layout"
@@ -42,9 +50,32 @@ class ProcessingMode(str, Enum):
 class Settings(BaseSettings):
     """Application settings with Phase 2 enhancements."""
     
-    # Google Gemini Configuration
+    # LLM Configuration - Multiple Providers Support
+    # Google Gemini (Primary) - Multiple models for auto-switching
     google_api_key: Optional[str] = None
     gemini_model: str = "gemini-1.5-pro-latest"
+    
+    # Gemini model fallback priority (highest to lowest capability)
+    gemini_models: List[str] = [
+        "gemini-2.5-flash",       # Highest capability - Latest advanced model
+        "gemini-1.5-pro-latest",  # High capability - Complex reasoning 
+        "gemini-2.0-flash",       # High capability - Balanced performance
+        "gemini-1.5-flash",       # Standard capability - Fast, repetitive tasks
+        "gemini-1.5-flash-8b",    # Lower capability - Lightweight, basic tasks
+        "gemini-2.5-flash-lite"   # Lowest capability - Simple, high-volume tasks
+    ]
+    
+    # OpenAI (Alternative)
+    openai_api_key: Optional[str] = None
+    openai_model: str = "gpt-4-turbo-preview"
+    openai_base_url: Optional[str] = None  # For custom endpoints
+    
+    # Anthropic Claude (Alternative)
+    anthropic_api_key: Optional[str] = None
+    anthropic_model: str = "claude-3-sonnet-20240229"
+    
+    # LLM Provider Priority (tried in order) - Ollama removed
+    llm_providers: List[str] = ["gemini", "openai", "anthropic"]
     
     # Neo4j Configuration
     neo4j_uri: Optional[str] = None

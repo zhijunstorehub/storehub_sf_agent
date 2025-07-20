@@ -1,5 +1,7 @@
 """Enhanced data models for the AI Colleague system - Phase 2 Expansion."""
 
+from __future__ import annotations
+
 from datetime import datetime
 from typing import List, Optional, Dict, Any, Union, Literal
 from pydantic import BaseModel, Field
