@@ -15,7 +15,7 @@ langchain>=0.1.0,<0.3.0
 langchain-text-splitters>=0.0.1,<0.1.0
 
 # LLM Providers - All optional, install as needed
-google-generativeai>=0.3.2,<0.5.0  # Google Gemini (Primary)
+google-generativeai==0.5.4 # Google Gemini (Primary)
 openai>=1.6.0,<2.0.0               # OpenAI GPT models (Secondary)
 anthropic>=0.8.1,<0.9.0            # Anthropic Claude (Tertiary)
 
@@ -32,6 +32,7 @@ simple-salesforce>=1.12.6,<2.0.0
 pandas>=2.1.0,<3.0.0
 matplotlib>=3.8.0,<4.0.0
 seaborn>=0.13.0,<0.14.0
+certifi>=2023.11.17,<2025.0.0   # SSL certificate bundle
 
 # Phase 2 - Enhanced Dependencies with version constraints
 aiohttp>=3.9.0,<4.0.0           # Async HTTP for Python 3.11+
@@ -56,6 +57,18 @@ typing-extensions>=4.8.0,<5.0.0  # Enhanced typing for Python 3.11+
 # Neo4j driver - Latest stable
 neo4j>=5.15.0,<6.0.0
 
+# Supabase and PostgreSQL dependencies
+supabase==2.7.4
+asyncpg==0.29.0
+sqlalchemy==2.0.25
+psycopg2-binary==2.9.9
+alembic==1.13.1
+
+# Vector embeddings for semantic search
+openai==1.55.0
+sentence-transformers==2.2.2
+numpy==1.26.4
+
 # System requirements (install manually):
 # ==========================================
 # Python 3.11+ (Required)
@@ -76,3 +89,9 @@ neo4j>=5.15.0,<6.0.0
 # Node.js 18+ LTS (for Salesforce CLI)
 #   Installation: https://nodejs.org/
 #   Required for: @salesforce/cli package manager 
+
+# New dependencies for the backend
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.0.0
+tqdm>=4.64.0 

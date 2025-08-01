@@ -121,6 +121,17 @@ class Settings(BaseSettings):
     metadata_output_directory: str = "output/metadata"
     temp_directory: str = "temp"
     
+    # Database Configuration
+    database_path: str = "data/salesforce_metadata.db"
+
+    # Supabase Configuration
+    supabase_url: str = os.getenv("SUPABASE_URL", "")
+    supabase_key: str = os.getenv("SUPABASE_ANON_KEY", "")
+    supabase_service_key: str = os.getenv("SUPABASE_SERVICE_ROLE_KEY", "")
+
+    # OpenAI Configuration for semantic search
+    openai_api_key: str = os.getenv("OPENAI_API_KEY", "")
+    
     def validate_neo4j_uri(self) -> Optional[str]:
         if self.neo4j_uri and not self.neo4j_uri.startswith(('neo4j://', 'neo4j+s://', 'bolt://', 'bolt+s://')):
             raise ValueError('Neo4j URI must start with neo4j://, neo4j+s://, bolt://, or bolt+s://')

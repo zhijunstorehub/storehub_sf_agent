@@ -1,83 +1,30 @@
-# Environment variables and secrets
-.env
-.env.local
-.env.production
-.env.staging
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+.pnpm-store/
 
 # Python
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
+*.pyc
+*.pyo
+*.pyd
 .Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-
-# Virtual environments
-venv/
 env/
-ENV/
-env.bak/
-venv.bak/
-
-# ChromaDB data
-data/
-*.sqlite3
-*.db
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# OS
+venv/
+pip-wheel-metadata/
+.installed.cfg
+*.egg-info/
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
 
-# Streamlit
-.streamlit/
+# Environment variables
+.env
+.env*.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# Logs
-*.log
-logs/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# pytest
-.pytest_cache/
-.coverage
-htmlcov/
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Debug files (temporary)
-debug_domain.py
-
-# Temporary files
-*.tmp
-*.temp 
+# IDEs
+.vscode/
+.idea/ 

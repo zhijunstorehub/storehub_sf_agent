@@ -1,317 +1,245 @@
-# 🤖 AI Colleague: Salesforce Intelligence Platform
+# Salesforce Metadata Analysis AI Colleague
 
-[![Phase](https://img.shields.io/badge/Phase-2%20COMPLETED-success)]() [![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)]() [![Python](https://img.shields.io/badge/Python-3.11%2B-blue)]() [![GraphRAG](https://img.shields.io/badge/GraphRAG-Active-green)]()
+An intelligent system that extracts, analyzes, and provides AI-powered descriptions for Salesforce object metadata using Gemini AI. This tool helps teams understand their Salesforce org structure by automatically generating business-oriented descriptions for custom fields while preserving official documentation for standard fields.
 
-**AI Colleague** is an advanced Salesforce metadata intelligence platform that provides semantic analysis, dependency mapping, and interactive exploration of your Salesforce org's architecture using AI-powered insights.
+## 🎯 Project Overview
 
-## 🎉 **LATEST UPDATE: Python 3.11+ Modernization Complete!**
+This system creates a comprehensive, searchable database of your Salesforce metadata with AI-generated descriptions. It's designed to help teams:
 
-**What's New**:
-- ✅ **Full Python 3.11+ compatibility** with modern type annotations
-- ✅ **Business logic fixes** - Flow filtering now correctly identifies 211 Account/Lead/Opportunity flows  
-- ✅ **GraphRAG working** - Natural language queries now retrieve context from 275 components in Neo4j
-- ✅ **275 components loaded** - ApexClasses, Flows, ValidationRules with full dependency mapping
-- ✅ **Enhanced standard objects** - Focused on Account, Lead, Opportunity, Quote, Order
+- **Understand Custom Fields**: Get AI-generated business descriptions for custom fields
+- **Preserve Documentation**: Use official Salesforce descriptions for standard fields
+- **Quality Control**: Confidence scoring and manual review workflows
+- **Team Collaboration**: Approve, edit, and maintain a "golden record" of metadata documentation
 
-## 🚀 **What This Platform Does**
+## 🏗️ Architecture
 
-### **🔍 Discover & Analyze**
-- **Comprehensive Metadata Discovery**: Automatically finds and catalogs all Salesforce components (Flows, Apex, Validation Rules, etc.)
-- **AI-Powered Analysis**: Uses Google Gemini to understand business purpose, complexity, and risk for each component
-- **Dependency Mapping**: Identifies relationships and dependencies between components
+The project consists of three main components:
 
-### **🧠 Intelligent Queries**
-- **Natural Language Interface**: Ask questions like "What flows handle Account management?" in plain English
-- **GraphRAG Technology**: Retrieves relevant context from knowledge graph to provide accurate, contextual answers
-- **Semantic Search**: Find components by meaning, not just text matching
+1. **Backend Services** (`src/app/`):
+   - **MetadataExtractor**: Uses Salesforce CLI to extract object/field metadata
+   - **AnalysisService**: Integrates with Gemini AI for description generation
+   - **DatabaseService**: SQLite-based storage with easy migration path
+   - **FastAPI Server**: REST API for frontend communication
 
-### **📊 Visualize & Understand**
-- **Dependency Visualization**: See how components relate to each other
-- **Risk Assessment**: Understand which components are complex or risky to change
-- **Impact Analysis**: Determine what might be affected by changes
+2. **Frontend Application** (`frontend/`):
+   - **Next.js + TypeScript**: Modern React application
+   - **Tailwind CSS**: Beautiful, responsive UI
+   - **Real-time Updates**: Live editing and re-analysis capabilities
 
-## 🎯 **Core Capabilities**
+3. **Data Pipeline**:
+   - Automated extraction from Salesforce using `sf` CLI
+   - Intelligent field analysis (standard vs custom)
+   - Confidence scoring and review workflows
 
-### **1. Comprehensive Metadata Analysis** ✅ **WORKING**
-```bash
-# Analyze multiple component types with AI-powered insights (Python 3.11+)
-python3.11 src/main.py analyze --type flow --type apexclass --limit 15 --save-results
+## 📋 Prerequisites
 
-# Get detailed system status and org inventory  
-python3.11 src/main.py status
-```
-**Result**: Extracts, analyzes, and stores metadata with AI insights in Neo4j knowledge graph.
+### Required Software
+- **Python 3.8+** with pip
+- **Node.js 18+** with npm
+- **Salesforce CLI** (`sf`) installed and configured
+- **Salesforce Org Access** with appropriate permissions
 
-### **2. Natural Language Queries** ✅ **WORKING**
-```bash
-# Ask questions about your Salesforce architecture
-python3.11 src/main.py query "What flows are available for Account management?"
-python3.11 src/main.py query "Which validation rules exist for Opportunities?"
-python3.11 src/main.py query "Show me complex Apex classes that need review"
-```
-**Result**: Intelligent responses with context retrieved from knowledge graph.
+### Required APIs
+- **Gemini API Key** for AI-powered analysis
 
-### **3. Dependency Analysis** ✅ **WORKING**
-```bash
-# Map component relationships and impact analysis
-python3.11 src/main.py dependencies
-python3.11 src/main.py dependencies --component Account_Assign_BC_as_Owner
-```
-**Result**: Comprehensive dependency mapping and relationship visualization.
+## 🚀 Quick Start
 
-### **4. Demo & Business Focus**
-```bash
-# Process business-critical standard objects
-python3.11 src/main.py demo --target-coverage 10
-```
-**Result**: Focused analysis of Account, Lead, Opportunity, Quote, and Order processes.
+### 1. Clone and Setup Backend
 
-## 🏗️ **Architecture & Technology**
-
-### **Modern Python 3.11+ Stack**
-- **🐍 Python 3.11+**: Modern type annotations, enhanced performance
-- **🤖 AI/LLM**: Google Gemini 2.5 Flash with intelligent model fallback
-- **📊 Graph Database**: Neo4j for relationship mapping and GraphRAG
-- **🔗 Salesforce Integration**: CLI-first approach with API fallback
-- **⚡ CLI Framework**: Click + Rich for beautiful console experience
-- **📋 Data Models**: Pydantic v2 with comprehensive type safety
-- **🔧 Modern Tooling**: Pre-commit hooks, Ruff formatting, comprehensive testing
-
-### **CLI-First Architecture** 
-**Why CLI-First?** [[memory:3779427]]
-- Uses official Salesforce CLI commands for authoritative data
-- 22,150% improvement validated (from 2 local files to 445 actual flows)
-- Robust fallback mechanisms to API when CLI unavailable
-
-### **Service Architecture**
-```
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   CLI Interface │────│ Processing Layer │────│ Service Layer   │
-│   (Rich/Click)  │    │  (Metadata Proc) │    │ (LLM/Graph/SF)  │
-└─────────────────┘    └──────────────────┘    └─────────────────┘
-         │                        │                        │
-         ▼                        ▼                        ▼
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│ Data Models     │    │ Configuration    │    │ External APIs   │
-│ (Pydantic v2)   │    │ (Settings/Env)   │    │ (SF/Gemini/Neo) │
-└─────────────────┘    └──────────────────┘    └─────────────────┘
-```
-
-## 🚀 **Quick Start**
-
-### **Prerequisites**
-- **Python 3.11+** (✅ Fully modernized - 3.11.13 tested)
-- **Salesforce CLI** (`sf`) installed and authenticated to your org
-- **Neo4j Database** (local or cloud) 
-- **LLM API access** (Google Gemini recommended, OpenAI/Anthropic supported)
-
-### **1. Installation**
 ```bash
 # Clone the repository
-git clone https://github.com/zhijunstorehub/salesforce-ai-colleague.git
+git clone <repository-url>
 cd salesforce-ai-colleague
 
-# Setup Python 3.11+ environment (automated)
-python3.11 setup_python3.py
+# Install Python dependencies
+pip install -r requirements.txt
 
-# Or manual installation
-python3.11 -m pip install -r requirements.txt
+# Verify Salesforce CLI connection
+sf org display -o sandbox  # Replace 'sandbox' with your org alias
 ```
 
-### **2. Configuration**
-Create `.env` file from template:
+### 2. Run Initial Data Extraction
+
 ```bash
-cp .env_template .env
+# Test with a few objects first
+cd src/app
+python3 main.py --org sandbox --limit 3
+
+# Run full extraction (can take a while for large orgs)
+python3 main.py --org sandbox
+
+# Run specific objects only
+python3 main.py --org sandbox --objects Account Contact Opportunity
 ```
 
-Configure your APIs:
+### 3. Start the Backend API
+
 ```bash
-# AI Services (Primary: Google Gemini)
-GOOGLE_API_KEY=your_gemini_api_key
-
-# Graph Database (Neo4j)
-NEO4J_URI=neo4j+s://your-instance.databases.neo4j.io
-NEO4J_USERNAME=neo4j
-NEO4J_PASSWORD=your_password
-NEO4J_DATABASE=neo4j
-
-# Salesforce (via CLI - sf org list to see available orgs)
-# No additional config needed if CLI is authenticated
+# In src/app directory
+python -m uvicorn api.fastapi_server:app --reload --host 0.0.0.0 --port 8000
 ```
 
-### **3. Verify Installation**
+The API will be available at `http://localhost:8000` with documentation at `http://localhost:8000/docs`.
+
+### 4. Setup and Start Frontend
+
 ```bash
-# Check system status
-python3.11 src/main.py status
+# Install frontend dependencies
+cd frontend
+npm install
 
-# Test with a small analysis
-python3.11 src/main.py analyze --type flow --limit 5 --save-results
-
-# Try a natural language query
-python3.11 src/main.py query "What components are in my org?"
+# Start the development server
+npm run dev
 ```
 
-## 📊 **Current Status: FULLY OPERATIONAL**
+The frontend will be available at `http://localhost:3000`.
 
-### ✅ **Verified Working Features**
+## 🔧 Configuration
 
-| Feature | Status | Current State |
-|---------|--------|---------------|
-| **Python 3.11+ Compatibility** | ✅ Production | All dependencies working, modern type annotations |
-| **Metadata Discovery** | ✅ Working | 8 types supported, 1,286+ components discoverable |
-| **Knowledge Graph** | ✅ Active | 275 components loaded with relationships |
-| **GraphRAG Queries** | ✅ Working | Natural language interface with context retrieval |
-| **AI Analysis** | ✅ Configured | Google Gemini with multi-model fallback |
-| **Salesforce Integration** | ✅ Verified | CLI + API, handles org authentication |
-| **Business Logic** | ✅ Fixed | Flow filtering correctly identifies 211 business flows |
-| **Dependency Mapping** | ✅ Working | Component relationships and impact analysis |
+### Environment Variables
 
-### **Supported Metadata Types**
-| Type | Status | Count Example | Notes |
-|------|--------|---------------|-------|
-| **Flows** | ✅ Working | 445 discovered | Pattern-based filtering for business objects |
-| **ApexClass** | ✅ Working | 15 loaded | Full dependency mapping |
-| **ValidationRule** | ✅ Working | 185 processed | Across 7 standard objects |
-| **ApexTrigger** | ⚠️ Partial | API issues | Data format needs fixing |
-| **CustomObject** | ⚠️ Not Impl | Discovery only | CLI extraction needed |
-| **CustomField** | 📋 Planned | - | Future implementation |
-| **WorkflowRule** | 📋 Planned | - | Future implementation |
-| **Process** | 📋 Planned | - | Future implementation |
+Create a `.env` file in the project root:
 
-## 📈 **Real Results & Evidence**
-
-### **Live Org Integration Verified**
-- ✅ **Connected to real Salesforce org** (Storehub Sdn Bhd)
-- ✅ **1,286+ components discovered** across multiple types
-- ✅ **445 flows found** via official Salesforce CLI
-- ✅ **211 business flows identified** for Account/Lead/Opportunity processes
-
-### **GraphRAG Intelligence Working**
 ```bash
-# Example query and result
-$ python3.11 src/main.py query "What flows are available for Account management?"
+# Salesforce Configuration
+SALESFORCE_ORG_ALIAS=sandbox
 
-📋 Answer:
-Based on the provided Salesforce metadata, the following flows are available for Account management:
+# AI Configuration
+GOOGLE_API_KEY=your_gemini_api_key_here
 
-1. **Account_Assign_BC_as_Owner**
-   Purpose: Automatically assigns Account Owner upon Account creation
-   
-2. **AM_Post_Onboarding_Complete_Survey** 
-   Purpose: Account Management post-onboarding follow-up and customer retention
+# Database Configuration
+DATABASE_PATH=data/salesforce_metadata.db
 
-Context retrieved from 5 components ✅
+# API Configuration
+NEXT_PUBLIC_API_URL=http://localhost:8000
 ```
 
-### **Performance Metrics**
-- **Flow Detection**: 22,150% improvement (2 local files → 445 actual flows)
-- **Processing Speed**: 15 ApexClasses with dependencies in ~2 minutes
-- **Memory Efficiency**: Modern Python 3.11+ with optimized data models
-- **Success Rate**: 15/15 components processed successfully
+### Database Migration
 
-## 🔧 **Development & Architecture**
+The system is designed for easy database migration. To switch from SQLite to another database:
 
-### **Project Structure** (See [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md))
+1. Update the `DatabaseService` class in `src/app/db/database_service.py`
+2. Install new database drivers
+3. Update connection string in configuration
+4. No changes needed to analysis logic or stored descriptions
+
+## 📊 Usage Guide
+
+### Initial Setup Workflow
+
+1. **Extract Metadata**: Run the extraction pipeline to populate your database
+2. **Review Low-Confidence Fields**: Check fields flagged for manual review
+3. **Approve Descriptions**: Mark high-quality descriptions as approved
+4. **Iterate**: Re-analyze fields as needed when metadata changes
+
+### Frontend Features
+
+- **Object Browser**: Navigate through your Salesforce objects
+- **Field Analysis**: View AI-generated descriptions with confidence scores
+- **Inline Editing**: Edit descriptions and adjust confidence scores
+- **Re-analysis**: Trigger fresh AI analysis for updated fields
+- **Review Queue**: Manage fields that need manual attention
+
+### API Endpoints
+
+Key API endpoints for integration:
+
+- `GET /api/objects/summary` - Object summaries with field counts
+- `GET /api/metadata/objects/{object_name}` - All fields for an object
+- `PUT /api/metadata/objects/{object_name}/fields/{field_name}` - Update field description
+- `POST /api/reanalyze` - Trigger re-analysis of fields
+- `GET /api/metadata/review` - Get fields needing review
+
+## 🧠 AI Integration
+
+### Field Analysis Logic
+
+1. **Standard Fields**: Uses existing Salesforce documentation when available
+2. **Custom Fields**: Prompts Gemini AI to analyze metadata and generate business descriptions
+3. **Confidence Scoring**: AI provides 1-10 confidence score for generated descriptions
+4. **Review Flagging**: Automatically flags low-confidence analyses for manual review
+
+### Gemini Integration
+
+The system currently uses placeholder calls for Gemini API. To integrate with real Gemini:
+
+1. Update `_call_llm_api` method in `src/app/services/analysis_service.py`
+2. Add your Gemini API key to environment variables
+3. Install the Gemini SDK: `pip install google-generativeai`
+
+Example integration:
+```python
+import google.generativeai as genai
+
+def _call_llm_api(self, prompt: str) -> dict:
+    genai.configure(api_key=self.api_key)
+    model = genai.GenerativeModel('gemini-pro')
+    response = model.generate_content(prompt)
+    # Parse response for description and confidence_score
+    return {"description": "...", "confidence_score": 8.5}
+```
+
+## 🗂️ Project Structure
+
 ```
 salesforce-ai-colleague/
-├── 📄 Core Documentation          # README, guides, session summaries
-├── ⚙️ Configuration Files         # pyproject.toml, requirements.txt, setup
-├── 🐍 Python Application (src/)   # Main CLI and service architecture
-├── 🌐 React Visualization         # Interactive project map (V1 preserved)
-├── 📦 Sample Data                 # Flow definitions for development
-└── 📚 Archive                     # Historical docs and obsolete scripts
+├── src/app/                    # Backend services
+│   ├── db/                     # Database service
+│   ├── extractor/              # Salesforce metadata extraction
+│   ├── services/               # AI analysis service
+│   ├── api/                    # FastAPI server
+│   └── main.py                 # Main data pipeline
+├── frontend/                   # Next.js frontend
+│   └── src/app/                # React components
+├── data/                       # SQLite database storage
+├── requirements.txt            # Python dependencies
+└── README.md                   # This file
 ```
 
-### **Available Commands**
-- **`analyze`** - Multi-component semantic analysis with AI insights
-- **`query`** - Natural language GraphRAG queries with context retrieval
-- **`dependencies`** - Component relationship analysis and visualization
-- **`demo`** - Business-focused processing of standard objects
-- **`status`** - System health, connectivity, and org inventory
+## 🔍 Troubleshooting
 
-### **Multi-Agent Integration Ready** [[memory:3784647]]
-The system is designed to integrate with broader multi-agent ecosystems that your team is building, with proper APIs for cross-agent communication in future phases.
+### Common Issues
 
-## 🎯 **Use Cases & Business Value**
-
-### **For Salesforce Administrators**
-- **🔍 Discovery**: "What flows exist in my org?" - Instantly catalog all automation
-- **🛡️ Risk Assessment**: Identify complex or risky components before changes
-- **📋 Documentation**: Auto-generate component documentation with AI insights
-- **🔗 Impact Analysis**: Understand what breaks when you change something
-
-### **For Developers**
-- **📊 Dependency Mapping**: See how Apex classes, triggers, and flows interact
-- **🧠 Code Intelligence**: AI analysis of business logic and technical debt
-- **🔧 Refactoring Support**: Identify candidates for optimization
-- **📈 Architecture Review**: Understand org complexity and patterns
-
-### **For Business Analysts**
-- **💼 Process Discovery**: Find all automation related to business processes
-- **📈 Business Impact**: Understand which components support critical processes
-- **🎯 Optimization**: Identify redundant or overlapping automation
-- **📋 Compliance**: Catalog and review business rules and validations
-
-## 🚧 **Limitations & Future Enhancements**
-
-### **Current Limitations**
-- **ApexTrigger extraction**: Data format mismatch needs fixing
-- **CustomObject analysis**: CLI-first approach not yet implemented
-- **Validation Rules via Tooling API**: Field name compatibility issues
-- **Multi-org support**: Currently single org focused
-
-### **Planned Enhancements**
-1. **Advanced Visualizations**: Interactive dependency graphs and impact dashboards
-2. **Multi-Org Support**: Scale across multiple Salesforce orgs
-3. **Automated Recommendations**: AI-suggested optimizations and best practices
-4. **Change Impact Prediction**: Predict effects of proposed changes
-5. **Governance Insights**: Compliance and security analysis
-
-## 📚 **Documentation & Guides**
-
-- **[PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md)** - Complete project organization
-- **[PYTHON3_MODERNIZATION_COMPLETE.md](PYTHON3_MODERNIZATION_COMPLETE.md)** - Technical achievements
-- **[PYTHON3_UPGRADE_GUIDE.md](PYTHON3_UPGRADE_GUIDE.md)** - Setup and installation guide
-- **[SESSION_SUMMARY.md](SESSION_SUMMARY.md)** - Latest session accomplishments
-- **[HOD_DEMO_GUIDE.md](HOD_DEMO_GUIDE.md)** - Demo and presentation guide
-- **[Interactive Map V1](interactive-project-map/README.md)** - Original visualization
-
-## 🤝 **Contributing & Development**
-
-This project uses modern Python 3.11+ standards:
-- **Poetry/pip** for dependency management
-- **Pre-commit hooks** for code quality
-- **Ruff** for fast linting and formatting
-- **Pydantic v2** for data validation
-- **Rich** for beautiful CLI output
-
+**Salesforce CLI Authentication**:
 ```bash
-# Development setup
-python3.11 setup_python3.py
-pre-commit install
-
-# Run tests and verification
-python3.11 src/main.py status
+sf org login web -o sandbox
+sf org display -o sandbox
 ```
 
-## 🏆 **Success Story**
+**Python Module Import Errors**:
+```bash
+# Ensure you're in the correct directory
+cd src/app
+export PYTHONPATH="$PWD:$PYTHONPATH"
+```
 
-**From Concept to Production:**
-- ✅ **V1**: Proof of concept with basic flow analysis
-- ✅ **Phase 2**: Complete architectural transformation (10x expansion)
-- ✅ **Python 3.11+ Modernization**: Future-proof foundation with working GraphRAG
-- 🚀 **Production Ready**: Real org integration, AI intelligence, professional architecture
+**Frontend API Connection Issues**:
+- Check that backend is running on port 8000
+- Verify CORS settings in FastAPI server
+- Check `NEXT_PUBLIC_API_URL` environment variable
 
-**The system successfully demonstrates real-time Salesforce metadata discovery, AI-powered semantic analysis, and intelligent query capabilities.**
+### Performance Optimization
 
----
+- Use `--limit` flag for testing with large orgs
+- Implement caching for frequently accessed objects
+- Consider database indexing for large datasets
+- Use background tasks for bulk re-analysis operations
 
-## 📄 **License & Support**
+## 🤝 Contributing
 
-**Built with ❤️ for the Salesforce community**
+This project is designed to be modular and extensible:
 
-This project demonstrates advanced Salesforce metadata intelligence capabilities and serves as a foundation for building sophisticated org analysis tools.
+- **Database Layer**: Easily swap SQLite for PostgreSQL, MySQL, etc.
+- **AI Provider**: Replace Gemini with OpenAI, Claude, or other LLMs
+- **Frontend**: Customize UI components and add new features
+- **Analysis Logic**: Extend field analysis with additional metadata sources
 
----
+## 📝 License
 
-*🚀 Ready for production deployment and advanced Salesforce intelligence!* 
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgments
+
+- Built on Salesforce CLI for robust metadata extraction
+- Uses Gemini AI for intelligent field analysis
+- Inspired by the need for better Salesforce documentation practices 
